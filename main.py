@@ -2,8 +2,10 @@ import math
 
 class Fraction:
     def __init__(self, num: int, denom: int):
-        if denom == 0 or type(num) != int or type(denom) != int:
-            raise TypeError
+        if denom == 0:
+            raise ZeroDivisionError("You can't divide by 0.")
+        elif type(num) != int or type(denom) != int:
+            raise TypeError("Numerator and denominator must be integers.")
         else:
             self.num = num
             self.denom = denom
@@ -20,6 +22,8 @@ class Fraction:
         elif self.denom == -1:
             self.num *= -1
             return str(self.num)
+        elif self.num == 0:
+            return "0"
         return str(self.num) + "/" + str(self.denom)
 
     def __add__(self, other):
@@ -89,8 +93,6 @@ class Fraction:
         return self.denom
 
 
-f = Fraction(6,-3)
+f = Fraction(2,1)
 f1 = Fraction(-12,8)
-e = f1/f
-print(e)
-print(e.get_den())
+f > 0/6
