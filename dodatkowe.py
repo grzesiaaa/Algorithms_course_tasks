@@ -24,7 +24,7 @@ class Fraction:
             gcd = math.gcd(self.num, self.denom)
             self.num //= gcd
             self.denom //= gcd
-            if (self.num < 0 and self.denom < 0) or (self.num > 0 and self.denom < 0):
+            if (self.num < 0 and self.denom < 0) or (self.num > 0 > self.denom):
                 self.num *= -1
                 self.denom *= -1
 
