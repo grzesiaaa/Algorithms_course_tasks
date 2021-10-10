@@ -43,23 +43,24 @@ class Fraction:
         elif self.num == 0:
             return "0"
         elif self.option == "simple":
-            return str(self.num) + "/" + str(self.denom)
+            return f"{self.num}/{self.denom}"
         elif self.option == "mixed":
             if self.num > 0 and (self.num < self.denom):
-                return str(self.num) + "/" + str(self.denom)
+                return f"{self.num}/{self.denom}"
             elif self.num < 0 and abs(self.num) > self.denom:
                 int_number = self.num // self.denom + 1
-                self.num = -(self.num-int_number*self.denom)
-                return str(int_number) + "(" + str(self.num) + "/" + str(self.denom) + ")"
+                return f"{int_number}({-(self.num-int_number*self.denom)}/{self.denom})"
             else:
                 int_number = self.num // self.denom
-                self.num = self.num - int_number * self.denom
-                return str(int_number) + "(" + str(self.num) + "/" + str(self.denom) + ")"
+                return f"{int_number}({self.num - int_number * self.denom}/{self.denom})"
 
     def __add__(self, other):
-        new_num = self.num * other.denom + other.num*self.denom
-        new_denom = self.denom * other.denom
-        new_fraction = Fraction(new_num,new_denom, self.option)
+        try:
+            new_num = self.num * other.denom + other.num*self.denom
+            new_denom = self.denom * other.denom
+            new_fraction = Fraction(new_num,new_denom, self.option)
+        except:
+            new_fraction = Fraction(self.num + other * self.denom, self.denom)
         return new_fraction
 
     def __sub__(self,other):
@@ -132,5 +133,5 @@ print(f)
 f.mixed("True")
 print(f)
 f.mixed("False")
-print(f)
+print(f + 5)
 # > < juz dziala na mixed ale
