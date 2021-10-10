@@ -81,6 +81,8 @@ class Fraction:
         return new_fraction
 
     def __lt__(self, other):
+        self.mixed("False")
+        other.mixed("False")
         if self.num/self.denom < other.num/other.denom:
             return True
         else:
@@ -123,9 +125,12 @@ class Fraction:
         return self.denom
 
 
-f = Fraction(-16,5)
+f = Fraction(16,5)
 f1 = Fraction(17,8)
-f2 = Fraction(3.5,1.5578)
-print(f2)
-f2.mixed("True")
-print(f2)
+f2 = Fraction(8.5,1.5578)
+print(f)
+f.mixed("True")
+print(f)
+f.mixed("False")
+print(f)
+# > < juz dziala na mixed ale
