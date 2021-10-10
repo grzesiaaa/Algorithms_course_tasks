@@ -93,6 +93,7 @@ class Fraction:
         return self.denom
 
 
-f = Fraction(2,1)
+f = Fraction(0,1)
 f1 = Fraction(-12,8)
-f > 0/6
+print(f)
+print(f1 > f)
