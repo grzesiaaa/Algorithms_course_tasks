@@ -1,5 +1,6 @@
 import math
 
+
 class Fraction:
     def __init__(self, num, denom, option: str = "simple"):
         self.option = option
@@ -10,12 +11,12 @@ class Fraction:
                 n = len(str(num).split('.')[1])
                 m = len(str(denom).split('.')[1])
                 if n >= m:
-                    num *= 10**n
+                    num *= 10 ** n
                     num = int(num)
-                    denom *= 10**n
+                    denom *= 10 ** n
                     denom = int(denom)
                 else:
-                    num *= 10**m
+                    num *= 10 ** m
                     num = int(num)
                     denom *= 10 ** m
                     denom = int(denom)
@@ -49,21 +50,21 @@ class Fraction:
                 return f"{self.num}/{self.denom}"
             elif self.num < 0 and abs(self.num) > self.denom:
                 int_number = self.num // self.denom + 1
-                return f"{int_number}({-(self.num-int_number*self.denom)}/{self.denom})"
+                return f"{int_number}({-(self.num - int_number * self.denom)}/{self.denom})"
             else:
                 int_number = self.num // self.denom
                 return f"{int_number}({self.num - int_number * self.denom}/{self.denom})"
 
     def __add__(self, other):
         try:
-            new_num = self.num * other.denom + other.num*self.denom
+            new_num = self.num * other.denom + other.num * self.denom
             new_denom = self.denom * other.denom
-            new_fraction = Fraction(new_num,new_denom, self.option)
+            new_fraction = Fraction(new_num, new_denom, self.option)
         except:
             new_fraction = Fraction(self.num + other * self.denom, self.denom)
         return new_fraction
 
-    def __sub__(self,other):
+    def __sub__(self, other):
         new_num = self.num * other.denom - other.num * self.denom
         new_denom = self.denom * other.denom
         new_fraction = Fraction(new_num, new_denom, self.option)
@@ -84,7 +85,7 @@ class Fraction:
     def __lt__(self, other):
         self.mixed("False")
         other.mixed("False")
-        if self.num/self.denom < other.num/other.denom:
+        if self.num / self.denom < other.num / other.denom:
             return True
         else:
             return False
@@ -96,7 +97,7 @@ class Fraction:
             return False"""
 
     def __le__(self, other):
-        if self.num/self.denom <= other.num/other.denom:
+        if self.num / self.denom <= other.num / other.denom:
             return True
         else:
             return False
@@ -107,14 +108,14 @@ class Fraction:
         else:
             return False"""
 
-    def __eq__(self,other):
-        if self.num/self.denom == other.num/other.denom:
+    def __eq__(self, other):
+        if self.num / self.denom == other.num / other.denom:
             return True
         else:
             return False
 
     def __ne__(self, other):
-        if self.num/self.denom != other.num/other.denom:
+        if self.num / self.denom != other.num / other.denom:
             return True
         else:
             return False
@@ -126,12 +127,14 @@ class Fraction:
         return self.denom
 
 
-f = Fraction(16,5)
-f1 = Fraction(17,8)
-f2 = Fraction(8.5,1.5578)
+f = Fraction(16, 5)
+f1 = Fraction(17, 8)
+f2 = Fraction(8.5, 1.5578)
 print(f)
 f.mixed("True")
 print(f)
 f.mixed("False")
 print(f + 5)
 # > < juz dziala na mixed ale
+print(isinstance(f, Fraction))
+
