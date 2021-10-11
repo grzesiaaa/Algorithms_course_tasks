@@ -20,6 +20,8 @@ class Fraction:
                     num = int(num)
                     denom *= 10 ** m
                     denom = int(denom)
+            elif (type(num) != float or type(num) != int) and (type(denom) != float or type(denom) != int):
+                raise TypeError("Give appropriate numerator and denominator.")
             self.num = num
             self.denom = denom
             gcd = math.gcd(self.num, self.denom)
