@@ -31,7 +31,7 @@ class Fraction:
             return str(self.num)
         elif self.num == 0:
             return "0"
-        return str(self.num) + "/" + str(self.denom)
+        return f"{self.num}/{self.denom}"
 
     def __add__(self, other):
         """
@@ -39,7 +39,7 @@ class Fraction:
         """
         new_num = self.num * other.denom + other.num*self.denom
         new_denom = self.denom * other.denom
-        new_fraction = Fraction(new_num,new_denom)
+        new_fraction = Fraction(new_num, new_denom)
         return new_fraction
 
     def __sub__(self, other):
@@ -130,8 +130,8 @@ class Fraction:
         return self.denom
 
 
-f = Fraction(1,3)
-f1 = Fraction(1,3)
-f2 = Fraction(-1,1)
+f = Fraction(1, 3)
+f1 = Fraction(1, 3)
+f2 = Fraction(-1, 1)
 print(f1/ ((f2)*f))
 # - przed wszystkim nadobowiazkowe
