@@ -7,7 +7,7 @@ class Fraction:
         if denom == 0:
             raise ZeroDivisionError("You can't divide by 0.")
         else:
-            if type(num) == float or type(denom) == float:
+            if type(num) == float and type(denom) == float:
                 n = len(str(num).split('.')[1])
                 m = len(str(denom).split('.')[1])
                 if n >= m:
@@ -20,8 +20,18 @@ class Fraction:
                     num = int(num)
                     denom *= 10 ** m
                     denom = int(denom)
-            elif (type(num) != float or type(num) != int) and (type(denom) != float or type(denom) != int):
-                raise TypeError("Give appropriate numerator and denominator.")
+            elif type(num) == float and type(denom) == int:
+                n = len(str(num).split('.')[1])
+                num *= 10 ** n
+                num = int(num)
+                denom *= 10 ** n
+            elif type(num) == int and type(denom) == float:
+                m = len(str(denom).split('.')[1])
+                num *= 10 ** m
+                num = int(num)
+                denom *= 10 ** m
+                denom = int(denom)
+
             self.num = num
             self.denom = denom
             gcd = math.gcd(self.num, self.denom)
@@ -58,39 +68,55 @@ class Fraction:
                 return f"{int_number}({self.num - int_number * self.denom}/{self.denom})"
 
     def __add__(self, other):
-        try:
+        if isinstance(other, Fraction):
             new_num = self.num * other.denom + other.num * self.denom
             new_denom = self.denom * other.denom
             new_fraction = Fraction(new_num, new_denom, self.option)
-        except:
+        else:
             new_fraction = Fraction(self.num + other * self.denom, self.denom)
         return new_fraction
 
+    def __radd__(self, other):
+        new_fraction = Fraction(other * self.denom + self.num, self.denom)
+        return new_fraction
+
     def __sub__(self, other):
-        try:
+        if isinstance(other, Fraction):
             new_num = self.num * other.denom - other.num * self.denom
             new_denom = self.denom * other.denom
             new_fraction = Fraction(new_num, new_denom, self.option)
-        except:
+        else:
             new_fraction = Fraction(self.num - other * self.denom, self.denom)
         return new_fraction
 
+    def __rsub__(self, other):
+        new_fraction = Fraction(other * self.denom - self.num, self.denom)
+        return new_fraction
+
     def __mul__(self, other):
-        try:
+        if isinstance(other, Fraction):
             new_num = self.num * other.num
             new_denom = self.denom * other.denom
             new_fraction = Fraction(new_num, new_denom, self.option)
-        except:
+        else:
             new_fraction = Fraction(self.num * other, self.denom)
         return new_fraction
 
+    def __rmul__(self, other):
+        new_fraction = Fraction(other * self.num, self.denom)
+        return new_fraction
+
     def __truediv__(self, other):
-        try:
+        if isinstance(other, Fraction):
             new_num = self.num * other.denom
             new_denom = self.denom * other.num
             new_fraction = Fraction(new_num, new_denom, self.option)
-        except:
+        else:
             new_fraction = Fraction(self.num, self.denom * other)
+        return new_fraction
+
+    def __rtruediv__(self, other):
+        new_fraction = Fraction(self.denom * other, self.num)
         return new_fraction
 
     def __lt__(self, other):
@@ -131,8 +157,16 @@ class Fraction:
         else:
             return False
 
+    def __neg__(self):
+        return Fraction(-self.num, self.denom)
+
     def get_num(self):
         return self.num
 
     def get_den(self):
         return self.denom
+
+
+f = Fraction(1,3)
+f1 = Fraction(1,3)
+print(-f/-f1)
