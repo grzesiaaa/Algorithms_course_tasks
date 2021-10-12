@@ -62,7 +62,7 @@ class Fraction:
 
     def __truediv__(self, other):
         """
-        An operator that defines summing fractions.
+        An operator that defines dividing fractions.
         """
         new_num = self.num * other.denom
         new_denom = self.denom * other.num
@@ -130,7 +130,8 @@ class Fraction:
         return self.denom
 
 
-f = Fraction(0,1)
-f1 = Fraction(-12,8)
-print(f)
-print(f1 > f)
+f = Fraction(1,3)
+f1 = Fraction(1,3)
+f2 = Fraction(-1,1)
+print(f1/ ((f2)*f))
+# - przed wszystkim nadobowiazkowe
