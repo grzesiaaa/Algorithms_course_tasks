@@ -4,48 +4,55 @@ import math
 class Fraction:
     def __init__(self, num, denom, option: str = "simple"):
         self.option = option
-        if denom == 0:
+        self.num = num
+        self.denom = denom
+        if isinstance(self.num, Fraction):
+            self.num = self.num.num / self.num.denom
+        if isinstance(self.denom, Fraction):
+            self.denom = self.denom.num / self.denom.denom
+        if self.denom == 0:
             raise ZeroDivisionError("You can't divide by 0.")
         else:
-            if type(num) == float and type(denom) == float:
-                n = len(str(num).split('.')[1])
-                m = len(str(denom).split('.')[1])
+            if type(self.num) == float and type(self.denom) == float:
+                n = len(str(self.num).split('.')[1])
+                m = len(str(self.denom).split('.')[1])
                 if n >= m:
-                    num *= 10 ** n
-                    num = int(num)
-                    denom *= 10 ** n
-                    denom = int(denom)
+                    self.num *= 10 ** n
+                    self.num = int(self.num)
+                    self.denom *= 10 ** n
+                    self.denom = int(self.denom)
                 else:
-                    num *= 10 ** m
-                    num = int(num)
-                    denom *= 10 ** m
-                    denom = int(denom)
-            elif type(num) == float and type(denom) == int:
-                n = len(str(num).split('.')[1])
-                num *= 10 ** n
-                num = int(num)
-                denom *= 10 ** n
-            elif type(num) == int and type(denom) == float:
-                m = len(str(denom).split('.')[1])
-                num *= 10 ** m
-                num = int(num)
-                denom *= 10 ** m
-                denom = int(denom)
-
-            self.num = num
-            self.denom = denom
+                    self.num *= 10 ** m
+                    self.num = int(self.num)
+                    self.denom *= 10 ** m
+                    self.denom = int(self.denom)
+            elif type(self.num) == float and type(self.denom) == int:
+                n = len(str(self.num).split('.')[1])
+                self.num *= 10 ** n
+                self.num = int(self.num)
+                self.denom *= 10 ** n
+            elif type(self.num) == int and type(self.denom) == float:
+                m = len(str(self.denom).split('.')[1])
+                self.num *= 10 ** m
+                self.num = int(self.num)
+                self.denom *= 10 ** m
+                self.denom = int(self.denom)
             gcd = math.gcd(self.num, self.denom)
             self.num //= gcd
             self.denom //= gcd
             if (self.num < 0 and self.denom < 0) or (self.num > 0 > self.denom):
                 self.num *= -1
                 self.denom *= -1
+            if isinstance(self.num, Fraction):
+                self.num = self.num.num / self.num.denom
 
     def mixed(self, opt):
         if opt == "False":
             self.option = "simple"
         elif opt == "True":
             self.option = "mixed"
+
+            #atrybt statyczny
 
     def __str__(self):
         if self.denom == 1:
@@ -167,6 +174,8 @@ class Fraction:
         return self.denom
 
 
-f = Fraction(1,3)
-f1 = Fraction(1,3)
-print(-f/-f1)
+f = Fraction(-5,5)
+f1 = Fraction(10,3)
+f2 = Fraction(f,-f)
+
+print(f2)
