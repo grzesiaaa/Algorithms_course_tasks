@@ -6,45 +6,55 @@ class Fraction:
         self.option = option
         self.num = num
         self.denom = denom
+        self.if_fraction()
+        if self.denom == 0:
+            raise ZeroDivisionError("You can't divide by 0.")
+        else:
+            self.if_float()
+            self.reduce()
+            self.customize()
+
+    def reduce(self):
+        gcd = math.gcd(self.num, self.denom)
+        self.num //= gcd
+        self.denom //= gcd
+
+    def customize(self):
+        if (self.num < 0 and self.denom < 0) or (self.num > 0 > self.denom):
+            self.num *= -1
+            self.denom *= -1
+
+    def if_fraction(self):
         if isinstance(self.num, Fraction):
             self.num = self.num.num / self.num.denom
         if isinstance(self.denom, Fraction):
             self.denom = self.denom.num / self.denom.denom
-        if self.denom == 0:
-            raise ZeroDivisionError("You can't divide by 0.")
-        else:
-            if type(self.num) == float and type(self.denom) == float:
-                n = len(str(self.num).split('.')[1])
-                m = len(str(self.denom).split('.')[1])
-                if n >= m:
-                    self.num *= 10 ** n
-                    self.num = int(self.num)
-                    self.denom *= 10 ** n
-                    self.denom = int(self.denom)
-                else:
-                    self.num *= 10 ** m
-                    self.num = int(self.num)
-                    self.denom *= 10 ** m
-                    self.denom = int(self.denom)
-            elif type(self.num) == float and type(self.denom) == int:
-                n = len(str(self.num).split('.')[1])
+
+    def if_float(self):
+        if type(self.num) == float and type(self.denom) == float:
+            n = len(str(self.num).split('.')[1])
+            m = len(str(self.denom).split('.')[1])
+            if n >= m:
                 self.num *= 10 ** n
                 self.num = int(self.num)
                 self.denom *= 10 ** n
-            elif type(self.num) == int and type(self.denom) == float:
-                m = len(str(self.denom).split('.')[1])
+                self.denom = int(self.denom)
+            else:
                 self.num *= 10 ** m
                 self.num = int(self.num)
                 self.denom *= 10 ** m
                 self.denom = int(self.denom)
-            gcd = math.gcd(self.num, self.denom)
-            self.num //= gcd
-            self.denom //= gcd
-            if (self.num < 0 and self.denom < 0) or (self.num > 0 > self.denom):
-                self.num *= -1
-                self.denom *= -1
-            if isinstance(self.num, Fraction):
-                self.num = self.num.num / self.num.denom
+        elif type(self.num) == float and type(self.denom) == int:
+            n = len(str(self.num).split('.')[1])
+            self.num *= 10 ** n
+            self.num = int(self.num)
+            self.denom *= 10 ** n
+        elif type(self.num) == int and type(self.denom) == float:
+            m = len(str(self.denom).split('.')[1])
+            self.num *= 10 ** m
+            self.num = int(self.num)
+            self.denom *= 10 ** m
+            self.denom = int(self.denom)
 
     def mixed(self, opt):
         if opt == "False":
@@ -127,8 +137,6 @@ class Fraction:
         return new_fraction
 
     def __lt__(self, other):
-        self.mixed("False")
-        other.mixed("False")
         if self.num / self.denom < other.num / other.denom:
             return True
         else:
@@ -174,8 +182,9 @@ class Fraction:
         return self.denom
 
 
-f = Fraction(-5,5)
+f = Fraction(6,5)
 f1 = Fraction(10,3)
-f2 = Fraction(f,-f)
-
+f2 = Fraction(1,5)
+f2.mixed("True")
 print(f2)
+print(f2 >= f)
