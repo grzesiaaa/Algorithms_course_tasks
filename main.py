@@ -130,8 +130,7 @@ class Fraction:
         return self.denom
 
 
-f = Fraction(1, 3)
-f1 = Fraction(1, 3)
-f2 = Fraction(-1, 1)
-print(f1/ ((f2)*f))
-# - przed wszystkim nadobowiazkowe
+f1 = Fraction(1, 4)
+f2 = Fraction(1, 2)
+f3 = f1+f2
+print(f3)
