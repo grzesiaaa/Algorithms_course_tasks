@@ -22,7 +22,7 @@ class Fraction:
 
     def __str__(self):
         """
-        An operator that defines string representation of the fraction.
+        string representation of the fraction
         """
         if self.denom == 1:
             return str(self.num)
@@ -35,7 +35,7 @@ class Fraction:
 
     def __add__(self, other):
         """
-        An operator that defines summing fractions.
+        summing fractions
         """
         new_num = self.num * other.denom + other.num*self.denom
         new_denom = self.denom * other.denom
@@ -44,7 +44,7 @@ class Fraction:
 
     def __sub__(self, other):
         """
-        An operator that defines subtracting fractions.
+        subtracting fractions
         """
         new_num = self.num * other.denom - other.num * self.denom
         new_denom = self.denom * other.denom
@@ -53,7 +53,7 @@ class Fraction:
 
     def __mul__(self, other):
         """
-        An operator that defines multiplying fractions.
+        multiplying fractions
         """
         new_num = self.num * other.num
         new_denom = self.denom * other.denom
@@ -62,7 +62,7 @@ class Fraction:
 
     def __truediv__(self, other):
         """
-        An operator that defines dividing fractions.
+        dividing fractions
         """
         new_num = self.num * other.denom
         new_denom = self.denom * other.num
@@ -71,7 +71,7 @@ class Fraction:
 
     def __lt__(self, other):
         """
-        An operator that defines comparing fractions if fraction is lower than another.
+        comparing fractions if fraction is lower than another
         """
         if self.num/self.denom < other.num/other.denom:
             return True
@@ -86,7 +86,7 @@ class Fraction:
 
     def __le__(self, other):
         """
-        An operator that defines comparing if fraction is lower equal to another.
+        comparing if fraction is lower equal to another
         """
         if self.num/self.denom <= other.num/other.denom:
             return True
@@ -101,7 +101,7 @@ class Fraction:
 
     def __eq__(self, other):
         """
-        An operator that defines comparing if fraction is equal to another.
+        comparing if fraction is equal to another
         """
         if self.num/self.denom == other.num/other.denom:
             return True
@@ -110,7 +110,7 @@ class Fraction:
 
     def __ne__(self, other):
         """
-        An operator that defines comparing if fraction is not equal to another.
+        comparing if fraction is not equal to another
         """
         if self.num/self.denom != other.num/other.denom:
             return True
@@ -119,13 +119,13 @@ class Fraction:
 
     def get_num(self):
         """
-        Function that gets numerator of the fraction.
+        numerator of the fraction
         """
         return self.num
 
     def get_den(self):
         """
-        Function that gets denominator of the fraction.
+        denominator of the fraction
         """
         return self.denom
 
