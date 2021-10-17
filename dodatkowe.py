@@ -2,8 +2,10 @@ import math
 
 
 class Fraction:
-    def __init__(self, num, denom, option: str = "simple"):
-        self.option = option
+
+    type = "simple"
+
+    def __init__(self, num, denom):
         self.num = num
         self.denom = denom
         self.if_fraction()
@@ -56,13 +58,12 @@ class Fraction:
             self.denom *= 10 ** m
             self.denom = int(self.denom)
 
-    def mixed(self, opt):
+    @staticmethod
+    def mixed(opt):
         if opt == "False":
-            self.option = "simple"
+            Fraction.type = "simple"
         elif opt == "True":
-            self.option = "mixed"
-
-            #atrybt statyczny
+            Fraction.type = "mixed"
 
     def __str__(self):
         if self.denom == 1:
@@ -72,9 +73,9 @@ class Fraction:
             return str(self.num)
         elif self.num == 0:
             return "0"
-        elif self.option == "simple":
+        elif Fraction.type == "simple":
             return f"{self.num}/{self.denom}"
-        elif self.option == "mixed":
+        elif Fraction.type == "mixed":
             if self.num > 0 and (self.num < self.denom):
                 return f"{self.num}/{self.denom}"
             elif self.num < 0 and abs(self.num) > self.denom:
@@ -88,7 +89,7 @@ class Fraction:
         if isinstance(other, Fraction):
             new_num = self.num * other.denom + other.num * self.denom
             new_denom = self.denom * other.denom
-            new_fraction = Fraction(new_num, new_denom, self.option)
+            new_fraction = Fraction(new_num, new_denom)
         else:
             new_fraction = Fraction(self.num + other * self.denom, self.denom)
         return new_fraction
@@ -101,7 +102,7 @@ class Fraction:
         if isinstance(other, Fraction):
             new_num = self.num * other.denom - other.num * self.denom
             new_denom = self.denom * other.denom
-            new_fraction = Fraction(new_num, new_denom, self.option)
+            new_fraction = Fraction(new_num, new_denom)
         else:
             new_fraction = Fraction(self.num - other * self.denom, self.denom)
         return new_fraction
@@ -114,7 +115,7 @@ class Fraction:
         if isinstance(other, Fraction):
             new_num = self.num * other.num
             new_denom = self.denom * other.denom
-            new_fraction = Fraction(new_num, new_denom, self.option)
+            new_fraction = Fraction(new_num, new_denom)
         else:
             new_fraction = Fraction(self.num * other, self.denom)
         return new_fraction
@@ -127,7 +128,7 @@ class Fraction:
         if isinstance(other, Fraction):
             new_num = self.num * other.denom
             new_denom = self.denom * other.num
-            new_fraction = Fraction(new_num, new_denom, self.option)
+            new_fraction = Fraction(new_num, new_denom)
         else:
             new_fraction = Fraction(self.num, self.denom * other)
         return new_fraction
@@ -184,7 +185,14 @@ class Fraction:
 
 f = Fraction(6,5)
 f1 = Fraction(10,3)
-f2 = Fraction(1,5)
-f2.mixed("True")
+f2 = Fraction(8,5)
 print(f2)
-print(f2 >= f)
+Fraction.mixed("True")
+print(f2)
+print(f1)
+Fraction.mixed("False")
+print(f2)
+print(f1)
+print(f1+f2)
+Fraction.mixed("True")
+print(f1+f2)
