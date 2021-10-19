@@ -129,9 +129,3 @@ class Fraction:
         Return denominator of the fraction.
         """
         return self.denom
-
-
-f1 = Fraction(1, 4)
-f2 = Fraction(1, 2)
-f3 = Fraction(8,3)
-print(f1+f2+f3)
