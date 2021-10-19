@@ -17,22 +17,34 @@ class Fraction:
             self.customize()
 
     def reduce(self):
+        """
+        Reduce the fraction.
+        """
         gcd = math.gcd(self.num, self.denom)
         self.num //= gcd
         self.denom //= gcd
 
     def customize(self):
+        """
+        Change the place of the minuses.
+        """
         if (self.num < 0 and self.denom < 0) or (self.num > 0 > self.denom):
             self.num *= -1
             self.denom *= -1
 
     def if_fraction(self):
+        """
+        Check if given object is a class object.
+        """
         if isinstance(self.num, Fraction):
             self.num = self.num.num / self.num.denom
         if isinstance(self.denom, Fraction):
             self.denom = self.denom.num / self.denom.denom
 
     def if_float(self):
+        """
+        Check if numerator or denominator are floats and if yes change into simple fraction.
+        """
         if type(self.num) == float and type(self.denom) == float:
             n = len(str(self.num).split('.')[1])
             m = len(str(self.denom).split('.')[1])
@@ -60,10 +72,16 @@ class Fraction:
 
     @staticmethod
     def mixed(opt):
+        """
+        Set type of the fraction (mixed or improper)
+        :param opt: True - mixed or False - improper
+        """
         if opt == "False":
             Fraction.type = "simple"
         elif opt == "True":
             Fraction.type = "mixed"
+        else:
+            raise TypeError("Wrong argument.")
 
     def __str__(self):
         if self.denom == 1:
