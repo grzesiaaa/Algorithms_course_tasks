@@ -90,12 +90,17 @@ class Fraction:
             new_num = self.num * other.denom + other.num * self.denom
             new_denom = self.denom * other.denom
             new_fraction = Fraction(new_num, new_denom)
-        else:
+        elif isinstance(other, (int, float)):
             new_fraction = Fraction(self.num + other * self.denom, self.denom)
+        else:
+            raise TypeError("Can't add.")
         return new_fraction
 
     def __radd__(self, other):
-        new_fraction = Fraction(other * self.denom + self.num, self.denom)
+        if isinstance(other, (int, float)):
+            new_fraction = Fraction(other * self.denom + self.num, self.denom)
+        else:
+            raise TypeError("Can't add.")
         return new_fraction
 
     def __sub__(self, other):
@@ -103,12 +108,17 @@ class Fraction:
             new_num = self.num * other.denom - other.num * self.denom
             new_denom = self.denom * other.denom
             new_fraction = Fraction(new_num, new_denom)
-        else:
+        elif isinstance(other, (int, float)):
             new_fraction = Fraction(self.num - other * self.denom, self.denom)
+        else:
+            raise TypeError("Can't subtract.")
         return new_fraction
 
     def __rsub__(self, other):
-        new_fraction = Fraction(other * self.denom - self.num, self.denom)
+        if isinstance(other, (int, float)):
+            new_fraction = Fraction(other * self.denom - self.num, self.denom)
+        else:
+            raise TypeError("Can't subtract.")
         return new_fraction
 
     def __mul__(self, other):
@@ -116,12 +126,17 @@ class Fraction:
             new_num = self.num * other.num
             new_denom = self.denom * other.denom
             new_fraction = Fraction(new_num, new_denom)
-        else:
+        elif isinstance(other, (int, float)):
             new_fraction = Fraction(self.num * other, self.denom)
+        else:
+            raise TypeError("Can't multiply.")
         return new_fraction
 
     def __rmul__(self, other):
-        new_fraction = Fraction(other * self.num, self.denom)
+        if isinstance(other, (int, float)):
+            new_fraction = Fraction(other * self.num, self.denom)
+        else:
+            raise TypeError("Can't multiply.")
         return new_fraction
 
     def __truediv__(self, other):
@@ -129,49 +144,102 @@ class Fraction:
             new_num = self.num * other.denom
             new_denom = self.denom * other.num
             new_fraction = Fraction(new_num, new_denom)
-        else:
+        elif isinstance(other, (int, float)):
             new_fraction = Fraction(self.num, self.denom * other)
+        else:
+            raise TypeError("Can't divide.")
         return new_fraction
 
     def __rtruediv__(self, other):
-        new_fraction = Fraction(self.denom * other, self.num)
+        if isinstance(other, (int, float)):
+            new_fraction = Fraction(self.denom * other, self.num)
+        else:
+            raise TypeError("Can't divide.")
         return new_fraction
 
     def __lt__(self, other):
-        if self.num / self.denom < other.num / other.denom:
-            return True
+        if isinstance(other, Fraction):
+            if self.num / self.denom < other.num / other.denom:
+                return True
+            else:
+                return False
+        elif isinstance(other, (int, float)):
+            if self.num / self.denom < other:
+                return True
+            else:
+                return False
         else:
-            return False
+            raise TypeError("Can't compare.")
 
-    """def __gt__(self, other):
-        if self.num/self.denom > other.num/other.denom:
-            return True
+    def __gt__(self, other):
+        if isinstance(other, Fraction):
+            if self.num / self.denom > other.num / other.denom:
+                return True
+            else:
+                return False
+        elif isinstance(other, (int, float)):
+            if self.num / self.denom > other:
+                return True
+            else:
+                return False
         else:
-            return False"""
+            raise TypeError("Can't compare.")
 
     def __le__(self, other):
-        if self.num / self.denom <= other.num / other.denom:
-            return True
+        if isinstance(other, Fraction):
+            if self.num / self.denom <= other.num / other.denom:
+                return True
+            else:
+                return False
+        elif isinstance(other, (int, float)):
+            if self.num / self.denom <= other:
+                return True
+            else:
+                return False
         else:
-            return False
+            raise TypeError("Can't compare.")
 
-    """def __ge__(self, other):
-        if self.num/self.denom >= other.num/other.denom:
-            return True
+    def __ge__(self, other):
+        if isinstance(other, Fraction):
+            if self.num/self.denom >= other.num/other.denom:
+                return True
+            else:
+                return False
+        elif isinstance(other, (int, float)):
+            if self.num / self.denom >= other:
+                return True
+            else:
+                return False
         else:
-            return False"""
+            raise TypeError("Can't compare.")
 
     def __eq__(self, other):
-        if self.num / self.denom == other.num / other.denom:
-            return True
+        if isinstance(other, Fraction):
+            if self.num / self.denom == other.num / other.denom:
+                return True
+            else:
+                return False
+        elif isinstance(other, (int, float)):
+            if self.num / self.denom == other:
+                return True
+            else:
+                return False
         else:
-            return False
+            raise TypeError("Can't compare.")
 
     def __ne__(self, other):
-        if self.num / self.denom != other.num / other.denom:
-            return True
+        if isinstance(other, Fraction):
+            if self.num / self.denom != other.num / other.denom:
+                return True
+            else:
+                return False
+        elif isinstance(other, (int, float)):
+            if self.num / self.denom != other:
+                return True
+            else:
+                return False
         else:
-            return False
+            raise TypeError("Can't compare.")
 
     def __neg__(self):
         return Fraction(-self.num, self.denom)
@@ -183,16 +251,3 @@ class Fraction:
         return self.denom
 
 
-f = Fraction(6,5)
-f1 = Fraction(10,3)
-f2 = Fraction(8,5)
-print(f2)
-Fraction.mixed("True")
-print(f2)
-print(f1)
-Fraction.mixed("False")
-print(f2)
-print(f1)
-print(f1+f2)
-Fraction.mixed("True")
-print(f1+f2)

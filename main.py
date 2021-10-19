@@ -129,3 +129,5 @@ class Fraction:
         Return denominator of the fraction.
         """
         return self.denom
+
+
