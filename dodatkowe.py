@@ -181,18 +181,3 @@ class Fraction:
 
     def get_den(self):
         return self.denom
-
-
-f = Fraction(6,5)
-f1 = Fraction(10,3)
-f2 = Fraction(8,5)
-print(f2)
-Fraction.mixed("True")
-print(f2)
-print(f1)
-Fraction.mixed("False")
-print(f2)
-print(f1)
-print(f1+f2)
-Fraction.mixed("True")
-print(f1+f2)
