@@ -45,27 +45,3 @@ def pythagorean_triple_4(l):
             return True, a, b, c, operations
     else:
         return False, None, None, None, operations
-
-
-start = time.time()
-for i in range(1,5000):
-    pythagorean_triple_1(10)
-print((time.time()-start)/5000)
-
-start = time.time()
-for i in range(1,5000):
-    pythagorean_triple_2(10)
-print((time.time()-start)/5000)
-
-start = time.time()
-for i in range(1,5000):
-    pythagorean_triple_3(10)
-print((time.time()-start)/5000)
-
-start = time.time()
-for i in range(1,5000):
-    pythagorean_triple_4(10)
-print((time.time()-start)/5000)
-
-
-
