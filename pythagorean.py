@@ -2,45 +2,45 @@ import time
 import math
 
 
-def pythagorean_triple_1(l):
+def pythagorean_triple_1(length):
     operations = 0
-    for a in range(1, l):
-        for b in range(1, l):
-            for c in range(1, l):
+    for a in range(1, length):
+        for b in range(1, length):
+            for c in range(1, length):
                 operations += 9
-                if a ** 2 + b ** 2 == c ** 2 and a + b + c == l:
+                if a ** 2 + b ** 2 == c ** 2 and a + b + c == length:
                     return True, a, b, c, operations
     else:
         return False, None, None, None, operations
 
-def pythagorean_triple_2(l):
+def pythagorean_triple_2(length):
     operations = 0
-    for a in range(1, l):
-        for b in range(a, l):
+    for a in range(1, length):
+        for b in range(a, length):
             operations += 7
-            c = l - a - b
+            c = length - a - b
             if a ** 2 + b ** 2 == c ** 2:
                 return True, a, b, c, operations
     else:
         return False, None, None, None, operations
 
-def pythagorean_triple_3(l):
+def pythagorean_triple_3(length):
     operations = 0
-    for a in range(1, l//2):
-        for b in range(a, l//2):
+    for a in range(1, length//2):
+        for b in range(a, length//2):
             operations += 7
-            c = l - a - b
+            c = length - a - b
             if a ** 2 + b ** 2 == c ** 2:
                 return True, a, b, c, operations
     else:
         return False, None, None, None, operations
 
-def pythagorean_triple_4(l):
+def pythagorean_triple_4(length):
     operations = 0
-    for a in range(1, l//3):
+    for a in range(1, length//3):
         operations += 14
-        b = (2*a*l-l*l)//(2*(a-l))
-        c = l - a - b
+        b = (2*a*length-length*length)//(2*(a-length))
+        c = length - a - b
         if a * a + b * b == c * c:
             return True, a, b, c, operations
     else:
