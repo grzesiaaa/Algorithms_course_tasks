@@ -10,8 +10,7 @@ def pythagorean_triple_1(length):
                 operations += 9
                 if a ** 2 + b ** 2 == c ** 2 and a + b + c == length:
                     return True, a, b, c, operations
-    else:
-        return False, None, None, None, operations
+    return False, None, None, None, operations
 
 def pythagorean_triple_2(length):
     operations = 0
@@ -21,8 +20,7 @@ def pythagorean_triple_2(length):
             c = length - a - b
             if a ** 2 + b ** 2 == c ** 2:
                 return True, a, b, c, operations
-    else:
-        return False, None, None, None, operations
+    return False, None, None, None, operations
 
 def pythagorean_triple_3(length):
     operations = 0
@@ -32,8 +30,7 @@ def pythagorean_triple_3(length):
             c = length - a - b
             if a ** 2 + b ** 2 == c ** 2:
                 return True, a, b, c, operations
-    else:
-        return False, None, None, None, operations
+    return False, None, None, None, operations
 
 def pythagorean_triple_4(length):
     operations = 0
@@ -43,5 +40,25 @@ def pythagorean_triple_4(length):
         c = length - a - b
         if a * a + b * b == c * c:
             return True, a, b, c, operations
-    else:
-        return False, None, None, None, operations
+    return False, None, None, None, operations
+
+def pythagorean_triple_5(length):
+    c = 0
+    m = 2
+    operations = 0
+    while c < length//2:
+        for n in range(1, m):
+            operations += 13
+            a = m * m - n * n
+            b = 2 * m * n
+            c = m * m + n * n
+            primitive_length = a + b + c
+            if length % primitive_length == 0:
+                operations += 5
+                k = length // primitive_length
+                a *= k
+                b *= k
+                c *= k
+                return True, a, b, c, operations
+        m += 1
+    return False, None, None, None, operations
