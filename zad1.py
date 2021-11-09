@@ -1,12 +1,3 @@
-"""def check(n, k, p):
-    if n < 0 or k < 0:
-        raise ValueError("n and k should be greater than 0.")
-    elif p < 0 or p > 1:
-        raise ValueError("Probability should be greater than 0 and lower than 1.")
-    elif n < k:
-        raise ValueError("n should be lower than k.")"""
-
-
 def binomial_coeff(n, k):
     if k == 0 or k == n:
         return 1

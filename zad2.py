@@ -1,43 +1,23 @@
-import time
-
-
 def ordinary_polynomial_value_calc(coeff, arg):
-    if type(coeff) == list:
-        result = 0
-        count_mult = 0
-        count_add = 0
-        j = len(coeff)
-        for i in reversed(coeff):
-            result += i * arg**(j-1)
-            count_add += 1
-            count_mult += j - 1
-            j -= 1
-        return result, count_mult, count_add - 1
+    result = 0
+    count_mult = 0
+    j = len(coeff)
+    count_add = j - 1
+    for i in reversed(coeff):
+        result += i * arg**(j-1)
+        count_mult += j - 1
+        j -= 1
+    return result, count_mult, count_add
 
 
 def smart_polynomial_value_calc(coeff, arg):
-    if type(coeff) == list:
-        result = 0
-        count_mult = 0
-        count_add = 0
-        for i in reversed(coeff):
-            result = result * arg + i
-            count_mult += 1
-            count_add += 1
-        count_add -= 1
-        count_mult -= 1
-        return result, count_mult, count_add
-    else:
-        raise TypeError("Coefficients must be a list.")
+    result = 0
+    count_mult = len(coeff) - 1
+    count_add = len(coeff) - 1
+    for i in reversed(coeff):
+        result = result * arg + i
+    return result, count_mult, count_add
 
 
-start_1 = time.time()
-for _ in range(100000):
-    smart_polynomial_value_calc([11, -2, 3, 3], 4)
-print(smart_polynomial_value_calc([11, -2, 3, 3], 4))
-print(time.time() - start_1)
-start_2 = time.time()
-for _ in range(100000):
-    ordinary_polynomial_value_calc([11, -2, 3, 3], 4)
-print(ordinary_polynomial_value_calc([11, -2, 3, 3], 4))
-print(time.time() - start_2)
+print(smart_polynomial_value_calc([5,0,2,3,4,3], -3))
+print(ordinary_polynomial_value_calc([11, -2, 3, 3], -3))
