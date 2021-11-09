@@ -2,7 +2,11 @@ def counting_chars_without_ifs(filename):
   file_ref = open(filename, 'r')
   text = file_ref.read().lower()
   char_count = {char: text.count(char) for char in set(list(text))}
-  del char_count[" "]
+  try:
+    del char_count[" "]
+    del char_count["\n"]
+  except:
+    pass
   return char_count
 
 
