@@ -18,14 +18,14 @@ def exp_by_squaring(x, m):
 
 def probability(n, k, p):
     prob = 0
-    count_mult = "do zrobienia"
-    constant = exp_by_squaring(1-p, n)
+    count_mult = "2k + log(n) + 3"
+    power = exp_by_squaring(1-p, n)
+    constant = p/(1-p)
     for i in range(0, k+1):
-        prob += binomial_coeff(n, i) * (p/(1-p))**i
-    prob *= constant
+        prob += binomial_coeff(n, i) * power
+        power *= constant
     return (prob, count_mult)
 
 
-print(probability(8,3,0.5))
 
 
