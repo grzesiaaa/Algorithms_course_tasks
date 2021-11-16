@@ -1,3 +1,5 @@
+import math
+
 def binomial_coeff(n, k):
     if k == 0 or k == n:
         return 1
@@ -18,7 +20,7 @@ def exp_by_squaring(x, m):
 
 def probability(n, k, p):
     prob = 0
-    count_mult = "2k + log(n) + 3"
+    count_mult = 2*k + math.log(n, 2) + 3
     power = exp_by_squaring(1-p, n)
     constant = p/(1-p)
     for i in range(0, k+1):
@@ -27,5 +29,5 @@ def probability(n, k, p):
     return (prob, count_mult)
 
 
-
+print(probability(16,7,0.3))
 
