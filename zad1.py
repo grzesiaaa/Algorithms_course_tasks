@@ -29,5 +29,3 @@ def probability(n, k, p):
     return (prob, count_mult)
 
 
-print(probability(16,7,0.3))
-
