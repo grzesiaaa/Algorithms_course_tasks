@@ -1,5 +1,6 @@
 import math
 
+
 def binomial_coeff(n, k):
     if k == 0 or k == n:
         return 1
