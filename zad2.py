@@ -18,6 +18,3 @@ def smart_polynomial_value_calc(coeff, arg):
         result = result * arg + i
     return result, count_mult, count_add
 
-
-print(smart_polynomial_value_calc([5,0,2,3,4,3], -3))
-print(ordinary_polynomial_value_calc([11, -2, 3, 3], -3))
