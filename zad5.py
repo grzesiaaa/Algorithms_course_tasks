@@ -134,8 +134,8 @@ class UnorderedList(object):
             temp.set_next(self.head)
             self.head = temp
         else:
-            temp.set_next(current)
             previous.set_next(temp)
+            temp.set_next(current)
 
     def pop(self, pos=-1):
         """
@@ -166,16 +166,4 @@ class UnorderedList(object):
             previous.set_next(current.get_next())
         return current.get_data()
 
-
-mylist = UnorderedList()
-mylist.add(31)
-mylist.add(77)
-mylist.add(17)
-mylist.add(93)
-mylist.add(26)
-mylist.add(54)
-print(mylist.size())
-print(mylist.index(26))
-print(mylist.pop(-6))
-print(mylist.size())
 
