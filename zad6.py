@@ -1,8 +1,4 @@
-class UnorderedList(object):
-    """
-    Tutaj skopiuj swoją implementację klasy UnorderedList,
-    wykonaną jako rezultat Zadania 5.
-    """
+from zad5 import UnorderedList
 
 
 class StackUsingUL(object):
@@ -15,6 +11,7 @@ class StackUsingUL(object):
         Nie pobiera argumentów.
         Zwraca True lub False.
         """
+        return self.items.is_empty()
 
     def push(self, item):
         """
@@ -22,6 +19,7 @@ class StackUsingUL(object):
         Pobiera element, który ma zostać umieszczony.
         Niczego nie zwraca.
         """
+        self.items.append(item)
 
     def pop(self):
         """
@@ -30,6 +28,9 @@ class StackUsingUL(object):
         Zwraca ściągnięty element.
         Jeśli stos jest pusty, rzuca wyjątkiem IndexError.
         """
+        if self.items.is_empty():
+            raise IndexError("Nothing to pop")
+        return self.items.pop()
 
     def peek(self):
         """
@@ -39,6 +40,10 @@ class StackUsingUL(object):
         Zwraca wierzchni element stosu.
         Jeśli stos jest pusty, rzuca wyjątkiem IndexError.
         """
+        if self.items.is_empty():
+            raise IndexError("Stack is empty")
+        else:
+            return self.items.peek()
 
     def size(self):
         """
@@ -46,3 +51,6 @@ class StackUsingUL(object):
         Nie pobiera argumentów.
         Zwraca liczbę elementów na stosie.
         """
+        return self.items.size()
+
+
