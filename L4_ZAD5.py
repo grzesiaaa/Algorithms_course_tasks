@@ -23,16 +23,23 @@ class UnorderedList(object):
         self.head = None
 
     def is_empty(self):
+        """
+        Sprawdź czy lista jest pusta.
+        """
         return self.head == None
 
     def add(self, item):
-        "dodaj item na poczatek listy"
+        """
+        Dodaj element na początek listy.
+        """
         temp = Node(item)
         temp.set_next(self.head)
         self.head = temp
 
     def size(self):
-        "zwroc dlugosc listy"
+        """
+        Zwróć dlugość listy.
+        """
         current = self.head
         count = 0
         while current != None:
@@ -41,7 +48,9 @@ class UnorderedList(object):
         return count
 
     def search(self, item):
-        "sprawdz czy item jest w liscie"
+        """
+        Sprawdź czy element jest w liście.
+        """
         current = self.head
         found = False
         while current != None and not found:
@@ -52,7 +61,9 @@ class UnorderedList(object):
         return found
 
     def remove(self, item):
-        "usun item z listy"
+        """
+        Usuń podany element z listy.
+        """
         current = self.head
         previous = None
         found = False
@@ -64,10 +75,22 @@ class UnorderedList(object):
                 previous = current
                 current = current.get_next()
 
-        if previous == None:  # jeśli usuwamy pierwszy element
+        if previous == None:
             self.head = current.get_next()
         else:
             previous.set_next(current.get_next())
+
+    def __str__(self):
+        """
+        Wypisz listę na ekran.
+        """
+        current = self.head
+        li = []
+        while current != None:
+            li.append(current.get_data())
+            current = current.get_next()
+        s = ("elements in the list are [" + ', '.join(['{}'] * len(li)) + "]")
+        return s.format(*li)
 
     def append(self, item):
         """
@@ -86,7 +109,6 @@ class UnorderedList(object):
                 previous = current
                 current = current.get_next()
             previous.set_next(temp)
-            temp.set_next(None)
 
     def index(self, item):
         """
@@ -115,7 +137,6 @@ class UnorderedList(object):
             return None
 
     def insert(self, pos, item):
-        #jak mamy 1 element to mozna dodac na 0 i 1, ogarnac ujemne pos
         """
         Metoda umieszcza na wskazanej pozycji zadany element.
         Przyjmuje jako argumenty pozycję,
@@ -130,18 +151,22 @@ class UnorderedList(object):
         index = 0
         temp = Node(item)
 
-        if pos >= self.size() or pos < -self.size():
+        if pos > self.size() or pos < -self.size()-1:
             raise IndexError("Incorrect position")
 
-        while current != None and index < pos:
-            previous = current
-            current = current.get_next()
-            index += 1
-
-        if pos == 0:
+        elif pos == 0:
             temp.set_next(self.head)
             self.head = temp
+
         else:
+            if pos < 0:
+                pos = pos + self.size() + 1
+
+            while current != None and index < pos:
+                previous = current
+                current = current.get_next()
+                index += 1
+
             previous.set_next(temp)
             temp.set_next(current)
 
@@ -161,40 +186,45 @@ class UnorderedList(object):
         previous = None
         index = 0
 
-        if pos >= self.size() or pos < -self.size():
+        if self.is_empty():
+            raise IndexError("Nothing to pop")
+        elif pos >= self.size() or pos < -self.size():
             raise IndexError("Incorrect position")
 
-        if pos < 0: #zamiana ujemnego indeksu na dodatni
-            pos = pos + self.size()
-
-        while current != None and index < pos:
-            previous = current
-            current = current.get_next()
-            index += 1
-
-        if previous is None:  # gdy usuwamy pierwszy
-            self.head = current.get_next()
-        elif previous is None and self.size() == 1:
+        elif self.size() == 1:
             self.head = None
-        # jak usuwam ostatni element to co zrobic?
-        else:
-            previous.set_next(current.get_next())
             return current.get_data()
 
+        else:
+            if pos < 0:
+                pos = pos + self.size()
+
+            while current != None and index < pos:
+                previous = current
+                current = current.get_next()
+                index += 1
+
+            if previous is None:
+                self.head = current.get_next()
+                return current.get_data()
+            else:
+                previous.set_next(current.get_next())
+                return current.get_data()
+
     def peek(self):
+        """
+        Metoda podaje wartość elementu na końcu listy.
+        Nie pobiera argumentów.
+        Jeśli lista jest pusta, rzuca wyjątkiem IndexError.
+        """
         current = self.head
         previous = None
+
+        if self.is_empty():
+            raise IndexError("Object is empty")
 
         while current != None:
             previous = current
             current = current.get_next()
         return previous.get_data()
 
-b=UnorderedList()
-b.append(3)
-b.append(6)
-b.append(7)
-print(b.size())
-print(b.pop())
-print(b.size())
-print(b.pop(-1))
