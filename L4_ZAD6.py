@@ -1,4 +1,4 @@
-from zad5 import UnorderedList
+from L4_ZAD5 import UnorderedList
 
 
 class StackUsingUL(object):
@@ -28,8 +28,6 @@ class StackUsingUL(object):
         Zwraca ściągnięty element.
         Jeśli stos jest pusty, rzuca wyjątkiem IndexError.
         """
-        if self.items.is_empty():
-            raise IndexError("Nothing to pop")
         return self.items.pop()
 
     def peek(self):
@@ -40,10 +38,7 @@ class StackUsingUL(object):
         Zwraca wierzchni element stosu.
         Jeśli stos jest pusty, rzuca wyjątkiem IndexError.
         """
-        if self.items.is_empty():
-            raise IndexError("Stack is empty")
-        else:
-            return self.items.peek()
+        return self.items.peek()
 
     def size(self):
         """
@@ -52,5 +47,6 @@ class StackUsingUL(object):
         Zwraca liczbę elementów na stosie.
         """
         return self.items.size()
+
 
 
