@@ -86,6 +86,7 @@ class UnorderedList(object):
                 previous = current
                 current = current.get_next()
             previous.set_next(temp)
+            temp.set_next(None)
 
     def index(self, item):
         """
@@ -114,6 +115,7 @@ class UnorderedList(object):
             return None
 
     def insert(self, pos, item):
+        #jak mamy 1 element to mozna dodac na 0 i 1, ogarnac ujemne pos
         """
         Metoda umieszcza na wskazanej pozycji zadany element.
         Przyjmuje jako argumenty pozycję,
@@ -173,7 +175,7 @@ class UnorderedList(object):
         if previous is None:  # gdy usuwamy pierwszy
             self.head = current.get_next()
         elif previous is None and self.size() == 1:
-            pass
+            self.head = None
         # jak usuwam ostatni element to co zrobic?
         else:
             previous.set_next(current.get_next())
@@ -188,4 +190,11 @@ class UnorderedList(object):
             current = current.get_next()
         return previous.get_data()
 
-
+b=UnorderedList()
+b.append(3)
+b.append(6)
+b.append(7)
+print(b.size())
+print(b.pop())
+print(b.size())
+print(b.pop(-1))
