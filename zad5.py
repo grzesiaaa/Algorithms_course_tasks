@@ -77,9 +77,15 @@ class UnorderedList(object):
         """
         current = self.head
         temp = Node(item)
-        while current != None:
-            current = current.get_next()
-        current.set_next(temp)
+        previous = None
+
+        if self.is_empty():
+            self.add(item)
+        else:
+            while current != None:
+                previous = current
+                current = current.get_next()
+            previous.set_next(temp)
 
     def index(self, item):
         """
@@ -148,6 +154,7 @@ class UnorderedList(object):
         Rzuca wyjątkiem IndexError w przypadku,
         gdy usunięcie elementu z danej pozycji jest niemożliwe.
         """
+
         current = self.head
         previous = None
         index = 0
@@ -155,15 +162,30 @@ class UnorderedList(object):
         if pos >= self.size() or pos < -self.size():
             raise IndexError("Incorrect position")
 
+        if pos < 0: #zamiana ujemnego indeksu na dodatni
+            pos = pos + self.size()
+
         while current != None and index < pos:
             previous = current
             current = current.get_next()
             index += 1
 
-        if previous is None: #gdy usuwamy pierwszy
+        if previous is None:  # gdy usuwamy pierwszy
             self.head = current.get_next()
+        elif previous is None and self.size() == 1:
+            pass
+        # jak usuwam ostatni element to co zrobic?
         else:
             previous.set_next(current.get_next())
-        return current.get_data()
+            return current.get_data()
+
+    def peek(self):
+        current = self.head
+        previous = None
+
+        while current != None:
+            previous = current
+            current = current.get_next()
+        return previous.get_data()
 
 
