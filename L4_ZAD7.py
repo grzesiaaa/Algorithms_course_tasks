@@ -1,4 +1,4 @@
-from zad5 import UnorderedList
+from L4_ZAD5 import UnorderedList
 
 
 class DequeueUsingUL(object):
@@ -37,10 +37,7 @@ class DequeueUsingUL(object):
         Zwraca usuwany element.
         W przypadku pustej kolejku rzuca wyjątkiem IndexError
         """
-        if self.items.is_empty():
-            raise IndexError
-        else:
-            return self.items.pop(0)
+        return self.items.pop(0)
 
     def remove_right(self):
         """
