@@ -35,38 +35,50 @@ def compare_enqueue(n):
     x1 = np.linspace(0, n)
     BaB_enq = count_times(n)[0] * x1
     plt.subplot(2, 1, 1)
-    plt.plot(x1, BaB_enq)
+    plt.plot(x1, BaB_enq, 'm.')
     plt.ylim(0, n/2)
+    plt.title("Enqueue method on QueueBaB")
+    plt.xlabel("Number of elements")
+    plt.ylabel("Time")
     plt.grid()
 
     x2 = np.linspace(0, n)
     BaE_enq = count_times(n)[1] * x2
     plt.subplot(2, 1, 2)
-    plt.plot(x2, BaE_enq)
+    plt.plot(x2, BaE_enq, 'b.')
     plt.ylim(0, n/2)
+    plt.title("Enqueue method on QueueBaE")
+    plt.xlabel("Number of elements")
+    plt.ylabel("Time")
     plt.grid()
 
+    plt.tight_layout()
     plt.show()
 
 def compare_dequeue(n):
     x3 = np.linspace(0, n)
     BaB_deq = count_times(n)[2] * x3
     plt.subplot(2, 1, 1)
-    plt.plot(x3, BaB_deq)
+    plt.plot(x3, BaB_deq, 'm.')
     plt.ylim(0, n/2)
+    plt.title("Dequeue method on QueueBaB")
+    plt.xlabel("Number of elements")
+    plt.ylabel("Time")
     plt.grid()
 
     x4 = np.linspace(0, n)
     BaE_deq = count_times(n)[3] * x4
     plt.subplot(2, 1, 2)
-    plt.plot(x4, BaE_deq)
+    plt.plot(x4, BaE_deq, 'b.')
     plt.ylim(0, n/2)
+    plt.title("Dequeue method on QueueBaE")
+    plt.xlabel("Number of elements")
+    plt.ylabel("Time")
     plt.grid()
 
+    plt.tight_layout()
     plt.show()
 
-
-print(compare_dequeue(100000))
 
 
 
