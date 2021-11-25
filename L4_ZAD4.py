@@ -17,6 +17,7 @@ class Stack:
     def size(self):
         return len(self.items)
 
+
 def matches(op, cl):
     opens = "<"
     closers = ">"
@@ -32,6 +33,7 @@ def checking_HTML_correctness(filename):
     s = Stack()
     balanced = True
     index = 0
+    #znaczniki otwierające i zamykające, komentarze <!
 
     file_obj = open(filename, 'r')
     text = file_obj.read()
