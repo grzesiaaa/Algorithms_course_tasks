@@ -68,13 +68,16 @@ class UnorderedList(object):
         previous = None
         found = False
 
+        if self.is_empty():
+            return "List already empty"
         while not found:
             if current.get_data() == item:
                 found = True
             else:
                 previous = current
                 current = current.get_next()
-
+                if current == None:
+                    return "Item not found"
         if previous == None:
             self.head = current.get_next()
         else:

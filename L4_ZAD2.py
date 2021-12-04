@@ -10,24 +10,24 @@ def count_times(n):
     start1 = time.time()
     for i in range(0, n):
         BaB.enqueue(i)
-    time1 = time.time()-start1
+    time_BaB_en = time.time()-start1
 
     start2 = time.time()
     for i in range(0, n):
         BaE.enqueue(i)
-    time2 = time.time()-start2
+    time_BaE_en = time.time()-start2
 
     start3 = time.time()
     for _ in range(0, n):
         BaB.dequeue()
-    time3 = time.time()-start3
+    time_BaB_de = time.time()-start3
 
     start4 = time.time()
     for _ in range(0, n):
         BaE.dequeue()
-    time4 = time.time() - start4
+    time_BaE_de = time.time() - start4
 
-    times = [time1, time2, time3, time4]
+    times = [time_BaB_en, time_BaE_en, time_BaB_de, time_BaE_de]
     return times
 
 
