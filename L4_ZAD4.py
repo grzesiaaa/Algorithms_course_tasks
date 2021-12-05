@@ -42,7 +42,7 @@ def checking_HTML_correctness(filename):
         # when we found char "<" we added it on stack and append index on a special
         # list of indexes of html tags
         # everything is okay because every html code begin with <
-        if symbol in "<":
+        if symbol == "<":
             s.push(symbol)
             list_of_tags_index.append([index])
         else:
