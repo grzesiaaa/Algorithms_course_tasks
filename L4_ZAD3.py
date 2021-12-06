@@ -137,25 +137,25 @@ def symulation_queue(people: int, doors: int):
     philharmonic.s = doors
     participants = types_of_tickets(people)
     list_of_queues = []
-    for i in range(doors):
+    times = []
+    time_tickets = 2
+    time_go_in = 1
+    for j in range(doors):
         list_of_queues.append(QueueBaB())
+        times.append(0)
     while not participants.is_empty():
         for queue in list_of_queues:
             queue.enqueue(participants.first())
             participants.dequeue()
-    time_tickets = 2
-    time_go_in = 1
-    whole_time = 0
     for i, queue in set(list_of_queues):
-        
-    while not participants.is_empty():
-        if participants.first().acom == 0:
-            whole_time += time_tickets + time_go_in
-            participants.dequeue()
-        else:
-            whole_time += (int(participants.first().acom)/2 + 1)*2
-            participants.dequeue()
-    return whole_time
+        while not queue.is_empty():
+            if queue.first().acom == 0:
+                times[i] += time_tickets + time_go_in
+                queue.dequeue()
+            else:
+                times[i] += (int(participants.first().acom) / 2 + 1) * 2
+                queue.dequeue()
+    return times.sort()
 
 
 print(symulation_queue(20, 2))
