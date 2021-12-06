@@ -9,7 +9,7 @@ zaprojektuj i przeprowadź symulację, która udzieli na nie odpowiedzi.
 Pamiętaj o określeniu wszystkich uproszczeń swojego modelu. 
 """
 
-import random
+from numpy import random
 
 """
 Jako symulację wybrałyśmy sytuację polegającą na określeniu prędkości wpuszczania ludzi do auli na koncert 
@@ -45,6 +45,7 @@ class Queue:
     def __str__(self):
         return str(self.items)
 
+
 class Participant:
     """ Participant contains participant's attributes.
 
@@ -62,15 +63,15 @@ class Participant:
     def __init__(self, number, place="out", happiness=100, accompany=0):
         self.n = number
         self.p = place
-        self.hap = happiness
+        "self.hap = happiness"
         self.acom = accompany
 
     def get_inside(self):
         """Changes place of the participant when gets inside the philharmonic"""
         self.p = "in"
 
-    def get_angry(self):
-        self.hap -= 10
+    """def get_angry(self):
+        self.hap -= 10"""
 
 
 class VIPParticipant:
@@ -89,10 +90,14 @@ class Philharmonic:
         self.s = doors
 
 
+def normal_dis_value(n, m):
+    return int(random.normal(n, m))
+
+
 def types_of_tickets(sold):
     list_of_participants = []
     for i in range(sold):
-        list_of_participants.append(Participant(number=i))
+        list_of_participants.append(Participant(number=i, accompany=normal_dis_value(2, 1)))
         if Participant(number=i).acom == 0:
             i += 1
         else:
@@ -100,4 +105,15 @@ def types_of_tickets(sold):
     return list_of_participants
 
 
-def
+def symulation_queue(people: int, doors: int):
+    philharmonic = Philharmonic()
+    philharmonic.s = doors
+    participants = types_of_tickets(people)
+    time = 1
+    for participant in participants:
+        if participant.acom == 0:
+            time += 1
+        else:
+            time += 1*participant.acom
+
+
