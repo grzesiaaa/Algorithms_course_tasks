@@ -25,25 +25,49 @@ Symulacje przeprowadzamy w różnych wariantach:
 """
 
 
-class Queue:
+class QueueBaB(object):
+    """
+    Klasa implementująca kolejkę za pomocą pythonowej listy tak,
+    że początek kolejki jest przechowywany na początku listy.
+    """
 
-    def __init__( self):
-        self.items = []
+    def __init__(self):
+        self.list_of_items = []
 
     def enqueue(self, item):
-        return self.items.insert(0, item)
+        """
+        Metoda służąca do dodawania obiektu do kolejki.
+        Pobiera jako argument obiekt który ma być dodany.
+        Niczego nie zwraca.
+        """
+        self.list_of_items.insert(-1, item)
 
     def dequeue(self):
-        return self.items.pop()
+        """
+        Metoda służąca do ściągania obiektu do kolejki.
+        Nie pobiera argumentów.
+        Zwraca ściągnięty obiekt.
+        """
+        return self.list_of_items.pop(0)
 
-    def isEmpty(self):
-        return self.items == []
+    def is_empty(self):
+        """
+        Metoda służąca do sprawdzania, czy kolejka jest pusta.
+        Nie pobiera argumentów.
+        Zwraca True jeśli kolejka jest pusta lub False gdy nie jest.
+        """
+        return self.list_of_items == []
 
     def size(self):
-        return len(self.items)
+        """
+        Metoda służąca do określania wielkości kolejki.
+        Nie pobiera argumentów.
+        Zwraca liczbę obiektów w kolejce.
+        """
+        return len(self.list_of_items)
 
     def __str__(self):
-        return str(self.items)
+        return str(self.list_of_items)
 
 
 class Participant:
@@ -95,9 +119,9 @@ def normal_dis_value(n, m):
 
 
 def types_of_tickets(sold):
-    list_of_participants = []
+    list_of_participants = QueueBaB()
     for i in range(sold):
-        list_of_participants.append(Participant(number=i, accompany=normal_dis_value(2, 1)))
+        list_of_participants.enqueue(Participant(number=i, accompany=normal_dis_value(2, 1)))
         if Participant(number=i).acom == 0:
             i += 1
         else:
@@ -110,10 +134,12 @@ def symulation_queue(people: int, doors: int):
     philharmonic.s = doors
     participants = types_of_tickets(people)
     time = 1
-    for participant in participants:
-        if participant.acom == 0:
+    for index in range(participants.size()):
+        if participants.acom == 0:
             time += 1
         else:
             time += 1*participant.acom
+    return participants
 
 
+"""print(symulation_queue(20, 2))"""
