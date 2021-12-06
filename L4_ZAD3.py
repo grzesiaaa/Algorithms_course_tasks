@@ -40,7 +40,7 @@ class QueueBaB(object):
         Pobiera jako argument obiekt który ma być dodany.
         Niczego nie zwraca.
         """
-        self.list_of_items.insert(-1, item)
+        self.list_of_items.insert(len(self.list_of_items), item)
 
     def dequeue(self):
         """
@@ -68,6 +68,9 @@ class QueueBaB(object):
 
     def __str__(self):
         return str(self.list_of_items)
+
+    def first(self):
+        return self.list_of_items[0] #na potrzeby zadania 3
 
 
 class Participant:
@@ -133,13 +136,26 @@ def symulation_queue(people: int, doors: int):
     philharmonic = Philharmonic()
     philharmonic.s = doors
     participants = types_of_tickets(people)
-    time = 1
-    for index in range(participants.size()):
-        if participants.acom == 0:
-            time += 1
+    list_of_queues = []
+    for i in range(doors):
+        list_of_queues.append(QueueBaB())
+    while not participants.is_empty():
+        for queue in list_of_queues:
+            queue.enqueue(participants.first())
+            participants.dequeue()
+    time_tickets = 2
+    time_go_in = 1
+    whole_time = 0
+    for i, queue in set(list_of_queues):
+        
+    while not participants.is_empty():
+        if participants.first().acom == 0:
+            whole_time += time_tickets + time_go_in
+            participants.dequeue()
         else:
-            time += 1*participant.acom
-    return participants
+            whole_time += (int(participants.first().acom)/2 + 1)*2
+            participants.dequeue()
+    return whole_time
 
 
-"""print(symulation_queue(20, 2))"""
+print(symulation_queue(20, 2))
