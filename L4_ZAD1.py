@@ -43,7 +43,7 @@ class QueueBaB(object):
         return str(self.list_of_items)
 
     def first(self):
-        return self.list_of_items[0] #na potrzeby zadania 3
+        return self.list_of_items[0]
 
 class QueueBaE(object):
     """
