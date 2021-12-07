@@ -9,7 +9,7 @@ zaprojektuj i przeprowadź symulację, która udzieli na nie odpowiedzi.
 Pamiętaj o określeniu wszystkich uproszczeń swojego modelu. 
 """
 
-from numpy import random, arange
+from numpy import random, arange, mean
 
 """
 Jako symulację wybrałyśmy sytuację polegającą na określeniu prędkości wpuszczania ludzi do auli na koncert 
@@ -98,22 +98,25 @@ class Philharmonic:
         self.s = doors
 
 
-def list_of_probable_values(length):
+def list_of_probable_values(length: int):
     list_of_values = []
-    for i in range(length):
+    #for i in range(length):
+    while sum(list_of_values) < length:
         list_of_values.append(random.choice(arange(0, 5), p=[0.1, 0.4, 0.15, 0.25, 0.1]))
+    list_of_values[-1] = sum(list_of_values) - length
     return list_of_values
 
 
 def types_of_tickets(sold: int, types: str, list_of_values: list):
     list_of_participants = QueueBaB()
+    print(list_of_values)
     if types == 'mixed':
-        for i in range(sold):
-            list_of_participants.enqueue(Participant(number=i, accompany=list_of_values[i]))
-            if Participant(number=i).acom == 0:
-                continue
+        for i in range(len(list_of_values)):
+            if list_of_values[i] == 0:
+                list_of_participants.enqueue(Participant(number=i, accompany=list_of_values[i]))
             else:
-                i += Participant(number=i).acom
+                list_of_participants.enqueue(Participant(number=i, accompany=list_of_values[i]))
+                print(list_of_participants.first())
         return list_of_participants
     elif types == 'singular':
         for j in range(sold):
@@ -130,7 +133,7 @@ def types_of_tickets(sold: int, types: str, list_of_values: list):
         return list_of_participants
 
 
-def symulation_queue(people: int, doors: int, types: str, list_of_tickets: list):
+def simulation_queue(people: int, doors: int, types: str, list_of_tickets: list):
     philharmonic = Philharmonic()
     philharmonic.s = doors
     participants = types_of_tickets(people, types, list_of_tickets)
@@ -140,7 +143,7 @@ def symulation_queue(people: int, doors: int, types: str, list_of_tickets: list)
     time_go_in = 1
     for j in range(doors):
         list_of_queues.append(QueueBaB())
-        times.append([0])
+        times.append([])
     while not participants.is_empty():
         for queue in list_of_queues:
             queue.enqueue(int(participants.first().acom))
@@ -151,26 +154,46 @@ def symulation_queue(people: int, doors: int, types: str, list_of_tickets: list)
                 times[i].append(time_tickets + time_go_in)
                 list_of_queues[i].dequeue()
             else:
-                times[i].append((int((list_of_queues[i].first() / 2 + 1) * 2)))
+                times[i].append((int((list_of_queues[i].first() / 2) + 1*list_of_queues[i].first())))
                 list_of_queues[i].dequeue()
     whole_times = []
     for n in range(len(times)):
         whole_times.append(sum(times[n]))
     whole_times.sort()
+    print(times)
+    print(whole_times)
     return whole_times[-1]
 
 
+simulation_queue_list_4 = []
+def simulation(n_simulations, n_people, n_doors):
+    singular_time = []
+    plural_time = []
+    mixed_time = []
+    for _ in range(n_simulations):
+        a = list_of_probable_values(n_people)
+        singular_time.append(simulation_queue(n_people, n_doors, 'singular', a))
+        plural_time.append(simulation_queue(n_people, n_doors, 'plural', a))
+        mixed_time.append(simulation_queue(n_people, n_doors, 'mixed', a))
+    print(mean(singular_time))
+    print(mean(plural_time))
+    print(mean(mixed_time))
+
+# simulation(500, 20, 1)
+
 a = list_of_probable_values(20)
-print(symulation_queue(20, 4, 'singular', a))
-print(symulation_queue(20, 4, 'mixed', a))
-print(symulation_queue(20, 4, 'plural', a))
+print(simulation_queue(20, 4, 'singular', a))
+print(simulation_queue(20, 4, 'mixed', a))
+print(simulation_queue(20, 4, 'plural', a))
 print('_____________')
-print(symulation_queue(20, 2, 'singular', a))
-print(symulation_queue(20, 2, 'mixed', a))
-print(symulation_queue(20, 2, 'plural', a))
+simulation_queue_list_4 = []
+
+print(simulation_queue(20, 2, 'singular', a))
+print(simulation_queue(20, 2, 'mixed', a))
+print(simulation_queue(20, 2, 'plural', a))
 print('_____________')
-print(symulation_queue(20, 1, 'singular', a))
-print(symulation_queue(20, 1, 'mixed', a))
-print(symulation_queue(20, 1, 'plural', a))
+print(simulation_queue(20, 1, 'singular', a))
+print(simulation_queue(20, 1, 'mixed', a))
+print(simulation_queue(20, 1, 'plural', a))
 
 
