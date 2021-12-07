@@ -79,6 +79,3 @@ def compare_dequeue(n):
     plt.tight_layout()
     plt.show()
 
-
-
-
