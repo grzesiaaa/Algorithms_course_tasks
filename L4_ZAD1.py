@@ -13,7 +13,7 @@ class QueueBaB(object):
         Pobiera jako argument obiekt który ma być dodany.
         Niczego nie zwraca.
         """
-        self.list_of_items.insert(len(self.list_of_items), item)
+        self.list_of_items.append(item)
 
     def dequeue(self):
         """
