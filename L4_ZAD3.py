@@ -163,6 +163,9 @@ def simulation_queue(people: int, doors: int, types: str, list_of_tickets: list)
 
 
 def simulation(n_simulations, n_people, n_doors):
+    """
+    Shows average time of n_simulations in particular situation.
+    """
     singular_time = []
     plural_time = []
     mixed_time = []
@@ -182,20 +185,3 @@ simulation(500, 20, 2)
 print('_____________')
 simulation(500, 20, 4)
 print('_____________')
-
-"""a = list_of_probable_values(20)
-print(simulation_queue(20, 4, 'singular', a))
-print(simulation_queue(20, 4, 'mixed', a))
-print(simulation_queue(20, 4, 'plural', a))
-print('_____________')
-simulation_queue_list_4 = []
-
-print(simulation_queue(20, 2, 'singular', a))
-print(simulation_queue(20, 2, 'mixed', a))
-print(simulation_queue(20, 2, 'plural', a))
-print('_____________')
-print(simulation_queue(20, 1, 'singular', a))
-print(simulation_queue(20, 1, 'mixed', a))
-print(simulation_queue(20, 1, 'plural', a))"""
-
-
