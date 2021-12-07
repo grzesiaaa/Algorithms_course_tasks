@@ -9,7 +9,7 @@ zaprojektuj i przeprowadź symulację, która udzieli na nie odpowiedzi.
 Pamiętaj o określeniu wszystkich uproszczeń swojego modelu. 
 """
 
-from numpy import random
+from numpy import random, arange
 
 """
 Jako symulację wybrałyśmy sytuację polegającą na określeniu prędkości wpuszczania ludzi do auli na koncert 
@@ -98,14 +98,10 @@ class Philharmonic:
         self.s = doors
 
 
-def normal_dis_value(n, m):
-    return int(random.normal(n, m))
-
-
-def list_of_normal_dis_values(lenght, n, m):
+def list_of_probable_values(length):
     list_of_values = []
-    for i in range(lenght):
-        list_of_values.append(normal_dis_value(n, m))
+    for i in range(length):
+        list_of_values.append(random.choice(arange(0, 5), p=[0.1, 0.4, 0.15, 0.25, 0.1]))
     return list_of_values
 
 
@@ -127,7 +123,7 @@ def types_of_tickets(sold: int, types: str, list_of_values: list):
         for k in range(len(list_of_values)):
             if list_of_values[k] == 0:
                 list_of_participants.enqueue(Participant(number=k, accompany=list_of_values[k]+1))
-                k += Participant(number=k).acom + 1
+                k += Participant(number=k).acom
             else:
                 list_of_participants.enqueue(Participant(number=k, accompany=list_of_values[k]))
                 k += Participant(number=k).acom
@@ -164,7 +160,7 @@ def symulation_queue(people: int, doors: int, types: str, list_of_tickets: list)
     return whole_times[-1]
 
 
-a = list_of_normal_dis_values(20, 2, 1)
+a = list_of_probable_values(20)
 print(symulation_queue(20, 4, 'singular', a))
 print(symulation_queue(20, 4, 'mixed', a))
 print(symulation_queue(20, 4, 'plural', a))
