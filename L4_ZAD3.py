@@ -115,27 +115,29 @@ def list_of_normal_dis_values(lenght, n, m):
     return list_of_values
 
 
-def types_of_tickets(sold, types, list_of_values):
+def types_of_tickets(sold: int, types: str, list_of_values: list):
     list_of_participants = QueueBaB()
     if types == 'mixed':
         for i in range(sold):
             list_of_participants.enqueue(Participant(number=i, accompany=list_of_values[i]))
             if Participant(number=i).acom == 0:
-                i += 1
+                pass
             else:
-                i += 1 + Participant(number=i).acom
+                i += Participant(number=i).acom
         return list_of_participants
     elif types == 'singular':
-        for i in range(sold):
-            list_of_participants.enqueue(Participant(number=i))
+        for j in range(sold):
+            list_of_participants.enqueue(Participant(number=j))
         return list_of_participants
-    """elif types == 'plural':
-        for i in range(sold):
-            a = normal_dis_value(n, m)
-            if a == 0:
-                
+    elif types == 'plural':
+        for k in range(len(list_of_values)):
+            if list_of_values[k] == 0:
+                list_of_participants.enqueue(Participant(number=k, accompany=list_of_values[k]+1))
+                k += Participant(number=k).acom + 1
             else:
-                list_of_participants.enqueue(Participant(number=i, accompany=a))"""
+                list_of_participants.enqueue(Participant(number=k, accompany=list_of_values[k]))
+                k += Participant(number=k).acom
+        return list_of_participants
 
 
 def symulation_queue(people: int, doors: int, types: str, list_of_tickets: list):
@@ -171,8 +173,14 @@ def symulation_queue(people: int, doors: int, types: str, list_of_tickets: list)
 a = list_of_normal_dis_values(20, 2, 1)
 print(symulation_queue(20, 4, 'singular', a))
 print(symulation_queue(20, 4, 'mixed', a))
+print(symulation_queue(20, 4, 'plural', a))
+print('_____________')
+print(symulation_queue(20, 2, 'singular', a))
 print(symulation_queue(20, 2, 'mixed', a))
+print(symulation_queue(20, 2, 'plural', a))
+print('_____________')
 print(symulation_queue(20, 1, 'singular', a))
 print(symulation_queue(20, 1, 'mixed', a))
+print(symulation_queue(20, 1, 'plural', a))
 
 
