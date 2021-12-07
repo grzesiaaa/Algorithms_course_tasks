@@ -20,8 +20,7 @@ Uczestnicy koncertu otrzymują różne atrybuty.
 Symulacje przeprowadzamy w różnych wariantach: 
     -gdy można zakupić bilety tylko pojedynczo;
     -gdy można zakupić zarówno bilety grupowe, jak i pojedyncze;
-    -gdy pojawiają się tzw. uczestnicy VIP, którzy mogą wejść bez kolejki. 
-
+    -gdy można zakupić bilety tylko grupowo. 
 """
 
 
@@ -83,14 +82,9 @@ class Participant:
     accompany: {int}
      how many people accompany the participant
     """
-    def __init__(self, number, place="out", accompany=0):
+    def __init__(self, number, accompany=0):
         self.n = number
         self.acom = accompany
-
-
-class VIPParticipant:
-    def __init__(self, place="out"):
-        self.p = place
 
 
 class Philharmonic:
@@ -121,7 +115,7 @@ def types_of_tickets(sold: int, types: str, list_of_values: list):
         for i in range(sold):
             list_of_participants.enqueue(Participant(number=i, accompany=list_of_values[i]))
             if Participant(number=i).acom == 0:
-                pass
+                continue
             else:
                 i += Participant(number=i).acom
         return list_of_participants
