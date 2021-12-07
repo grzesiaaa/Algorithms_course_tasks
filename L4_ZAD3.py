@@ -109,14 +109,12 @@ def list_of_probable_values(length: int):
 
 def types_of_tickets(sold: int, types: str, list_of_values: list):
     list_of_participants = QueueBaB()
-    print(list_of_values)
     if types == 'mixed':
         for i in range(len(list_of_values)):
             if list_of_values[i] == 0:
                 list_of_participants.enqueue(Participant(number=i, accompany=list_of_values[i]))
             else:
                 list_of_participants.enqueue(Participant(number=i, accompany=list_of_values[i]))
-                print(list_of_participants.first())
         return list_of_participants
     elif types == 'singular':
         for j in range(sold):
@@ -146,8 +144,9 @@ def simulation_queue(people: int, doors: int, types: str, list_of_tickets: list)
         times.append([])
     while not participants.is_empty():
         for queue in list_of_queues:
-            queue.enqueue(int(participants.first().acom))
-            participants.dequeue()
+            if not participants.is_empty():
+                queue.enqueue(int(participants.first().acom))
+                participants.dequeue()
     for i in range(len(list_of_queues)):
         while not list_of_queues[i].is_empty():
             if list_of_queues[i].first() == 0:
@@ -160,12 +159,9 @@ def simulation_queue(people: int, doors: int, types: str, list_of_tickets: list)
     for n in range(len(times)):
         whole_times.append(sum(times[n]))
     whole_times.sort()
-    print(times)
-    print(whole_times)
     return whole_times[-1]
 
 
-simulation_queue_list_4 = []
 def simulation(n_simulations, n_people, n_doors):
     singular_time = []
     plural_time = []
@@ -179,7 +175,12 @@ def simulation(n_simulations, n_people, n_doors):
     print(mean(plural_time))
     print(mean(mixed_time))
 
-# simulation(500, 20, 1)
+simulation(500, 20, 1)
+print('_____________')
+simulation(500, 20, 2)
+print('_____________')
+simulation(500, 20, 4)
+print('_____________')
 
 a = list_of_probable_values(20)
 print(simulation_queue(20, 4, 'singular', a))
