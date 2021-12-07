@@ -70,7 +70,7 @@ class QueueBaB(object):
         return str(self.list_of_items)
 
     def first(self):
-        return self.list_of_items[0] #na potrzeby zadania 3
+        return self.list_of_items[0]
 
 
 class Participant:
@@ -80,21 +80,12 @@ class Participant:
     _____________
     number: {int}
      number of the participant
-    place: {str}
-     place of participant, in or outside the philharmonic
-    happiness: {int}
-     amount of happiness of the participant; goes down when sees VIPParticipant
     accompany: {int}
      how many people accompany the participant
     """
     def __init__(self, number, place="out", accompany=0):
         self.n = number
-        self.p = place
         self.acom = accompany
-
-    def get_inside(self):
-        """Changes place of the participant when gets inside the philharmonic"""
-        self.p = "in"
 
 
 class VIPParticipant:
@@ -124,9 +115,8 @@ def list_of_normal_dis_values(lenght, n, m):
     return list_of_values
 
 
-def types_of_tickets(sold, types, list_of_tickets):
+def types_of_tickets(sold, types, list_of_values):
     list_of_participants = QueueBaB()
-    list_of_values = list_of_tickets
     if types == 'mixed':
         for i in range(sold):
             list_of_participants.enqueue(Participant(number=i, accompany=list_of_values[i]))
