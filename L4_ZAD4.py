@@ -49,7 +49,6 @@ def checking_HTML_correctness(filename):
             for i in range(start + 1, end):
                 string += str(html_code[i])
             all_tags_list.append(string.split(" ")[0])
-            index += 1
 
     good_tag_list =[]
     for tag in all_tags_list:
@@ -71,6 +70,3 @@ def checking_HTML_correctness(filename):
         return True
     else:
         return False
-
-
-print(checking_HTML_correctness("L4_ZAD4_sampleHTML_1.txt"))
