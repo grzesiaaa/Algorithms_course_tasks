@@ -171,9 +171,10 @@ def simulation(n_simulations, n_people, n_doors):
         singular_time.append(simulation_queue(n_people, n_doors, 'singular', a))
         plural_time.append(simulation_queue(n_people, n_doors, 'plural', a))
         mixed_time.append(simulation_queue(n_people, n_doors, 'mixed', a))
-    print(mean(singular_time))
-    print(mean(plural_time))
-    print(mean(mixed_time))
+    print("Singular average time:", mean(singular_time))
+    print("Plural average time:", mean(plural_time))
+    print("Mixed average time:", mean(mixed_time))
+
 
 simulation(500, 20, 1)
 print('_____________')
@@ -182,7 +183,7 @@ print('_____________')
 simulation(500, 20, 4)
 print('_____________')
 
-a = list_of_probable_values(20)
+"""a = list_of_probable_values(20)
 print(simulation_queue(20, 4, 'singular', a))
 print(simulation_queue(20, 4, 'mixed', a))
 print(simulation_queue(20, 4, 'plural', a))
@@ -195,6 +196,6 @@ print(simulation_queue(20, 2, 'plural', a))
 print('_____________')
 print(simulation_queue(20, 1, 'singular', a))
 print(simulation_queue(20, 1, 'mixed', a))
-print(simulation_queue(20, 1, 'plural', a))
+print(simulation_queue(20, 1, 'plural', a))"""
 
 
