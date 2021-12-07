@@ -53,7 +53,7 @@ def checking_HTML_correctness(filename):
 
     good_tag_list =[]
     for tag in all_tags_list:
-        if tag in no_closing_tags or tag == "!--":
+        if tag in no_closing_tags:
             pass
         else:
             good_tag_list.append(tag)
