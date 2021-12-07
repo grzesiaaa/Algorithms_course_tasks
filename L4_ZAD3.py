@@ -87,7 +87,7 @@ class Participant:
     accompany: {int}
      how many people accompany the participant
     """
-    def __init__(self, number, place="out", happiness=100, accompany=0):
+    def __init__(self, number, place="out", accompany=0):
         self.n = number
         self.p = place
         "self.hap = happiness"
@@ -121,41 +121,61 @@ def normal_dis_value(n, m):
     return int(random.normal(n, m))
 
 
-def types_of_tickets(sold):
+def types_of_tickets(sold, types, n, m):
     list_of_participants = QueueBaB()
-    for i in range(sold):
-        list_of_participants.enqueue(Participant(number=i, accompany=normal_dis_value(2, 1)))
-        if Participant(number=i).acom == 0:
-            i += 1
-        else:
-            i += 1 + Participant(number=i).acom
-    return list_of_participants
+    if types == 'mixed':
+        for i in range(sold):
+            list_of_participants.enqueue(Participant(number=i, accompany=normal_dis_value(n, m)))
+            if Participant(number=i).acom == 0:
+                i += 1
+            else:
+                i += 1 + Participant(number=i).acom
+        return list_of_participants
+    elif types == 'singular':
+        for i in range(sold):
+            list_of_participants.enqueue(Participant(number=i))
+        return list_of_participants
+    """elif types == 'plural':
+        for i in range(sold):
+            a = normal_dis_value(n, m)
+            if a == 0:
+                
+            else:
+                list_of_participants.enqueue(Participant(number=i, accompany=a))"""
 
 
-def symulation_queue(people: int, doors: int):
+def symulation_queue(people: int, doors: int, types: str, n, m):
     philharmonic = Philharmonic()
     philharmonic.s = doors
-    participants = types_of_tickets(people)
+    participants = types_of_tickets(people, types, n, m)
     list_of_queues = []
     times = []
     time_tickets = 2
     time_go_in = 1
     for j in range(doors):
         list_of_queues.append(QueueBaB())
-        times.append(0)
+        times.append([0])
     while not participants.is_empty():
         for queue in list_of_queues:
-            queue.enqueue(participants.first())
+            queue.enqueue(int(participants.first().acom))
             participants.dequeue()
-    for i, queue in set(list_of_queues):
-        while not queue.is_empty():
-            if queue.first().acom == 0:
-                times[i] += time_tickets + time_go_in
-                queue.dequeue()
+            #print(queue)
+    for i in range(len(list_of_queues)):
+        while not list_of_queues[i].is_empty():
+            if list_of_queues[i].first() == 0:
+                #print(times[i])
+                times[i].append(time_tickets + time_go_in)
+                list_of_queues[i].dequeue()
             else:
-                times[i] += (int(participants.first().acom) / 2 + 1) * 2
-                queue.dequeue()
-    return times.sort()
+                times[i].append((int((list_of_queues[i].first() / 2 + 1) * 2)))
+                list_of_queues[i].dequeue()
+    #print(times)
+    whole_times = []
+    for n in range(len(times)):
+        whole_times.append(sum(times[n]))
+    whole_times.sort()
+    return whole_times[-1]
 
 
-print(symulation_queue(20, 2))
+print(symulation_queue(20, 4, 'singular', 2, 1))
+print(symulation_queue(20, 4, 'mixed', 2, 1))
