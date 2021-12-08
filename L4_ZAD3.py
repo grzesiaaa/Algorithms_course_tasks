@@ -179,9 +179,10 @@ def simulation(n_simulations, n_people, n_doors):
     print("Mixed average time:", mean(mixed_time))
 
 
-simulation(500, 20, 1)
-print('_____________')
-simulation(500, 20, 2)
-print('_____________')
-simulation(500, 20, 4)
-print('_____________')
+if __name__ == "__main__":
+    simulation(500, 20, 1)
+    print('_____________')
+    simulation(500, 20, 2)
+    print('_____________')
+    simulation(500, 20, 4)
+    print('_____________')
