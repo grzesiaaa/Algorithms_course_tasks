@@ -26,5 +26,5 @@ def main(degree, length):
     turtle.goto(-350, 300)
     turtle.pendown()
     hilbert_curve(degree, 90, length)
-    turtle.done()
+    window.exitonclick()
 
