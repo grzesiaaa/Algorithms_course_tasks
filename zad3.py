@@ -1,5 +1,6 @@
 import turtle
 
+
 def hilbert_curve(degree, angle, length):
     if degree > 0:
         turtle.right(angle)
@@ -13,6 +14,7 @@ def hilbert_curve(degree, angle, length):
         turtle.forward(length)
         hilbert_curve(degree - 1, -angle, length)
         turtle.right(angle)
+
 
 def main(degree, length):
     window = turtle.Screen()

@@ -10,11 +10,11 @@ def lala(n):
     vectors = []
 
     for i in range(1, n+1):
-        a = [[random.randint(-100, 100) for col in range(i)] for row in range(i)]
-        b = [random.randint(-100, 100) for col in range(i)]
+        matrices = [[random.randint(-100, 100) for col in range(i)] for row in range(i)]
+        vectors = [random.randint(-100, 100) for col in range(i)]
 
-    a = np.array(a)
-    b = np.array(b)
+    a = np.array(matrices)
+    b = np.array(vectors)
     print(a)
     print(b)
     x = linalg.solve(a, b)
