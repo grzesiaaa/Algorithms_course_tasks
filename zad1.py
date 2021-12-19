@@ -5,7 +5,6 @@ import time
 import matplotlib.pyplot as plt
 
 
-<<<<<<< Updated upstream
 def lala(n):
     matrices =[]
     vectors = []
@@ -30,7 +29,7 @@ b= np.array([8,1,3])
 x = linalg.solve(a,b)
 print(x)
 print(np.dot(a,x) ==b)"""
-=======
+
 def lin_alg(n):
     matrices = []
     vectors = []
@@ -82,4 +81,3 @@ def lin_alg(n):
 
 if __name__ == '__main__':
     lin_alg(100)
->>>>>>> Stashed changes
