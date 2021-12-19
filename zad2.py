@@ -44,6 +44,3 @@ def Hanoi(amount):
         A[0].push(i)
     return move_disk(A, B, C, amount)
 
-
-if __name__ == "__main__":
-    print(Hanoi(4))
