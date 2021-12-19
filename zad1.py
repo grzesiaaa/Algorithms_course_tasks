@@ -6,19 +6,20 @@ import matplotlib.pyplot as plt
 
 
 def lala(n):
-    matrices =[]
+    matrices = []
     vectors = []
 
-    for i in range(1,n+1):
+    for i in range(1, n+1):
         a = [[random.randint(-100, 100) for col in range(i)] for row in range(i)]
         b = [random.randint(-100, 100) for col in range(i)]
+
     a = np.array(a)
     b = np.array(b)
     print(a)
     print(b)
-    x = linalg.solve(a,b)
+    x = linalg.solve(a, b)
     print(x)
-    return np.dot(a,x) == b
+    return np.dot(a, x) == b
 
 
 print(lala(3))
@@ -29,6 +30,7 @@ b= np.array([8,1,3])
 x = linalg.solve(a,b)
 print(x)
 print(np.dot(a,x) ==b)"""
+
 
 def lin_alg(n):
     matrices = []
@@ -48,7 +50,7 @@ def lin_alg(n):
         start_matrix = time.time()
         for i in range(0, n):
             print(str(linalg.det(matrices[j])))
-            if (linalg.det(matrices[j]) == 0):
+            if linalg.det(matrices[j]) == 0:
                 print("Determinant equal 0")
             else:
                 print("Determinant equal: " + str(linalg.det(matrices[j])))
