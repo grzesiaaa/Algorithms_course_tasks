@@ -1,5 +1,6 @@
 import turtle
 
+
 def koch_curve(degree, length):
     if degree == 0:
         turtle.forward(length)
@@ -12,6 +13,7 @@ def koch_curve(degree, length):
         koch_curve(degree - 1, length)
         turtle.left(60)
         koch_curve(degree - 1, length)
+
 
 def main(degree, length):
     turtle.hideturtle()
@@ -29,7 +31,9 @@ def main(degree, length):
     turtle.done()
     window.exitonclick()
 
-#main(3,300)
+
+main(3,300)
+
 
 def snowflake(degree, length):
 
@@ -49,4 +53,5 @@ def snowflake(degree, length):
     turtle.done()
     window.exitonclick()
 
-#snowflake(4,300)
+
+snowflake(4,300)
