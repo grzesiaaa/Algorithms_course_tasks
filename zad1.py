@@ -12,6 +12,7 @@ def check_time(n):
     linalg.solve(matrix, vector)
     return time.time() - start_time
 
+
 def plot_times(n, step):
     x = list(range(0, n, step))
     y = [check_time(i) for i in x]
@@ -22,8 +23,10 @@ def plot_times(n, step):
     plt.grid()
     plt.show()
 
+
 def func(x, a, b, c):
     return a*x**2 + b*x + c
+
 
 def find_factors(n, step):
     x = list(range(0, n, step))
@@ -32,7 +35,8 @@ def find_factors(n, step):
     a = popt[0]
     b = popt[1]
     c = popt[2]
-    return [a,b,c]
+    return [a, b, c]
+
 
 def check(n, step):
     a = find_factors(n, step)[0]
@@ -45,6 +49,6 @@ def check(n, step):
     plt.show()
 
 
-
+print(check(5000, 300))
 
 #https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html
