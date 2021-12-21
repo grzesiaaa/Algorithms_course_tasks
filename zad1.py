@@ -1,10 +1,8 @@
 import numpy as np
 from scipy import linalg
-import time
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
-import math
-
+import time
 
 
 def check_time(n):
@@ -27,22 +25,17 @@ def plot_times():
     plt.grid()
     plt.show()
 
-    ratio = [None]*len(y)
-    for i in range(1, len(y)):
-        ratio[i] = y[i] / y[i - 1]
-    lratio = [None]
-    for val in ratio:
-        if val:
-            lratio.append(math.log(val, 2))
-    print("{} \t {} \t {} \t {}".format("N", "T", "Ratio", "Log"))
-    for i in range(len(y)):
-        print("{} \t {} \t {} \t {}".format(x[i], y[i], ratio[i], lratio[i]))
-
-#print(plot_times())
+def plot_log():
+    x = []
+    for k in range(9, 15):
+        x.append(2 ** k)
+    y = [check_time(i) for i in x]
+    plt.loglog(x, y, 'g.')
+    plt.show()
 
 
-def func(x, a):
-    return a*x**2
+def func(x, a, b):
+    return a*(x**b)
 
 
 def find_factors():
@@ -52,16 +45,14 @@ def find_factors():
     y = [check_time(i) for i in x]
     popt, pcov = curve_fit(func, x, y)
     a = popt[0]
-    return a
-
+    b = popt[1]
+    return [a, b]
 
 def check():
-    a = find_factors()
-    print(find_factors())
-    x = np.arange(512, 2**15 + 1 )
-    plt.plot(x, func(x, a))
+    a = find_factors()[0]
+    b = find_factors()[1]
+    print(a, b)
+    x = np.arange(2**9, 2**14+1)
+    plt.plot(x, func(x, a, b))
     plot_times()
     plt.show()
-
-#print(check())
-#https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html
