@@ -43,4 +43,3 @@ def Hanoi(amount):
     for i in range(1, amount+1):
         A[0].push(i)
     return move_disk(A, B, C, amount)
-

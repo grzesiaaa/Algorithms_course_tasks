@@ -49,6 +49,4 @@ def check(n, step):
     plt.show()
 
 
-print(check(5000, 300))
-
 #https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html
