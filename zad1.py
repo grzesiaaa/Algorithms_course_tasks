@@ -3,6 +3,8 @@ from scipy import linalg
 import time
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
+import math
+
 
 
 def check_time(n):
@@ -13,8 +15,10 @@ def check_time(n):
     return time.time() - start_time
 
 
-def plot_times(n, step):
-    x = list(range(0, n, step))
+def plot_times():
+    x = []
+    for k in range(9, 15):
+        x.append(2**k)
     y = [check_time(i) for i in x]
     plt.plot(x, y, 'm.')
     plt.xlabel("Number of unknowns")
@@ -23,30 +27,41 @@ def plot_times(n, step):
     plt.grid()
     plt.show()
 
+    ratio = [None]*len(y)
+    for i in range(1, len(y)):
+        ratio[i] = y[i] / y[i - 1]
+    lratio = [None]
+    for val in ratio:
+        if val:
+            lratio.append(math.log(val, 2))
+    print("{} \t {} \t {} \t {}".format("N", "T", "Ratio", "Log"))
+    for i in range(len(y)):
+        print("{} \t {} \t {} \t {}".format(x[i], y[i], ratio[i], lratio[i]))
 
-def func(x, a, b, c):
-    return a*x**2 + b*x + c
+#print(plot_times())
 
 
-def find_factors(n, step):
-    x = list(range(0, n, step))
+def func(x, a):
+    return a*x**2
+
+
+def find_factors():
+    x = []
+    for k in range(9, 15):
+        x.append(2 ** k)
     y = [check_time(i) for i in x]
     popt, pcov = curve_fit(func, x, y)
     a = popt[0]
-    b = popt[1]
-    c = popt[2]
-    return [a, b, c]
+    return a
 
 
-def check(n, step):
-    a = find_factors(n, step)[0]
-    b = find_factors(n, step)[1]
-    c = find_factors(n, step)[2]
-    print(find_factors(n, step))
-    x = np.arange(0, n)
-    plt.plot(x, func(x, a, b, c))
-    plot_times(n, step)
+def check():
+    a = find_factors()
+    print(find_factors())
+    x = np.arange(512, 2**15 + 1 )
+    plt.plot(x, func(x, a))
+    plot_times()
     plt.show()
 
-
+#print(check())
 #https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html
