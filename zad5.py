@@ -1,14 +1,15 @@
 from pythonds.graphs import PriorityQueue
 
-def dijkstra(aGraph,start):
+
+def shortest_way(aGraph, start):
     pq = PriorityQueue()
     start.setDistance(0)
-    pq.buildHeap([(v.getDistance(),v) for v in aGraph])
+    pq.buildHeap([(v.getDistance(), v) for v in aGraph])
     while not pq.isEmpty():
         currentVert = pq.delMin()
         for nextVert in currentVert.getConnections():
             newDist = currentVert.getDistance() + currentVert.getWeight(nextVert)
             if newDist < nextVert.getDistance():
-                nextVert.setDistance( newDist )
+                nextVert.setDistance(newDist)
                 nextVert.setPred(currentVert)
-                pq.decreaseKey(nextVert,newDist)
+                pq.decreaseKey(nextVert, newDist)
