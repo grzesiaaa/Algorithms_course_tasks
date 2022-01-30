@@ -6,11 +6,11 @@ class Vertex:
     def __init__(self, num):
         self.id = num
         self.connectedTo = {}
-        self.color = 'white'  # new: color of node
-        self.dist = sys.maxsize  # new: distance from beginning (will be used later)
-        self.pred = None  # new: predecessor
-        self.disc = 0  # new: discovery time
-        self.fin = 0  # new: end-of-processing time
+        self.color = 'white'
+        self.dist = sys.maxsize
+        self.pred = None
+        self.disc = 0
+        self.fin = 0
 
     def addNeighbor(self, nbr, weight=0):
         self.connectedTo[nbr] = weight
@@ -213,5 +213,3 @@ class Graph:
         startVertex.setColor('black')
         self.time += 1
         startVertex.setFinish(self.time)
-
-
