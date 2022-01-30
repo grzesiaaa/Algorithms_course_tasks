@@ -1,11 +1,12 @@
 import graphviz
 
+
 class Vertex:
-    def __init__(self,key):
+    def __init__(self, key):
         self.id = key
         self.connectedTo = {}
 
-    def addNeighbor(self,nbr,weight=0):
+    def addNeighbor(self, nbr, weight=0):
         self.connectedTo[nbr] = weight
 
     def __str__(self):
@@ -17,7 +18,7 @@ class Vertex:
     def getId(self):
         return self.id
 
-    def getWeight(self,nbr):
+    def getWeight(self, nbr):
         return self.connectedTo[nbr]
 
 
