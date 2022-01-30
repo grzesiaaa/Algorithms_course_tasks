@@ -1,19 +1,21 @@
 from zad3 import Graph, QueueBaE
 from graphviz import Digraph
 
-
+a=20
 class Missionary:
-    def __init__(self):
+    def __init__(self, x1, y1):
         self.y = {}
         n = 0
-        for i in range(4):
-            for j in range(4):
+        self.x1 = x1
+        self.y1= y1
+        for i in range(x1+1):
+            for j in range(y1+1):
                 for k in range(2):
-                    self.y[n] = [i, j, k, 3 - i, 3 - j]
+                    self.y[n] = [i, j, k, x1 - i, y1 - j]
                     n += 1
         self.y_values = list(self.y.values())
         self.graph = Graph()
-        self.graph.addVertex(30)
+        self.graph.addVertex((x1+1) * (y1 +1) * 2 -2)
 
     def move_boat(self, situation):
         id = situation.id
@@ -31,16 +33,16 @@ class Missionary:
                 good = False
             elif x[1] > x[0] > 0:
                 good = False
-            elif 3 - x[1] > 3 - x[0] > 0:
+            elif self.x1 - x[1] > self.y1 - x[0] > 0:
                 good = False
             if boat == 0 and good:
-                key = self.y_values.index([x[0], x[1], 1, 3 - x[0], 3 - x[1]])
+                key = self.y_values.index([x[0], x[1], 1, self.x1 - x[0], self.y1 - x[1]])
                 if not self.graph.getVertex(key):
                     self.graph.addEdge(id, key)
                 else:
                     self.graph.getVertex(key).setColor('gray')
             elif boat == 1 and good:
-                key = self.y_values.index([3 - x[0], 3 - x[1], 0, x[0], x[1]])
+                key = self.y_values.index([self.x1 - x[0], self.y1 - x[1], 0, x[0], x[1]])
                 if not self.graph.getVertex(key):
                     self.graph.addEdge(id, key)
                 else:
@@ -63,7 +65,7 @@ class Missionary:
         dot.render('solution.gv', view=True)
 
     def creating_solution(self):
-        start = self.graph.getVertex(30)
+        start = self.graph.getVertex((self.x1+1) * (self.y1 +1) * 2 -2)
         vertQueue = QueueBaE()
         vertQueue.enqueue(start)
         while vertQueue.size() > 0:
@@ -80,5 +82,5 @@ class Missionary:
         self.createDot1()
 
 
-problem = Missionary()
+problem = Missionary(4, 3)
 problem.creating_solution()
