@@ -1,13 +1,13 @@
 from zad3 import Graph, QueueBaE
 from graphviz import Digraph
 
-a=20
+
 class Missionary:
     def __init__(self, x1, y1):
         self.y = {}
         n = 0
         self.x1 = x1
-        self.y1= y1
+        self.y1 = y1
         for i in range(x1+1):
             for j in range(y1+1):
                 for k in range(2):
@@ -15,7 +15,7 @@ class Missionary:
                     n += 1
         self.y_values = list(self.y.values())
         self.graph = Graph()
-        self.graph.addVertex((x1+1) * (y1 +1) * 2 -2)
+        self.graph.addVertex((x1+1) * (y1+1) * 2 - 2)
 
     def move_boat(self, situation):
         id = situation.id
@@ -65,7 +65,7 @@ class Missionary:
         dot.render('solution.gv', view=True)
 
     def creating_solution(self):
-        start = self.graph.getVertex((self.x1+1) * (self.y1 +1) * 2 -2)
+        start = self.graph.getVertex((self.x1+1) * (self.y1+1) * 2 - 2)
         vertQueue = QueueBaE()
         vertQueue.enqueue(start)
         while vertQueue.size() > 0:
