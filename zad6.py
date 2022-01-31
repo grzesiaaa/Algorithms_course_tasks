@@ -3,7 +3,7 @@ from graphviz import Digraph
 
 
 class Missionary:
-    def __init__(self, x1, y1):
+    def __init__(self, x1: int, y1: int):
         self.y = {}
         n = 0
         self.x1 = x1
@@ -33,7 +33,7 @@ class Missionary:
                 good = False
             elif x[1] > x[0] > 0:
                 good = False
-            elif self.x1 - x[1] > self.y1 - x[0] > 0:
+            elif self.y1 - x[1] > self.x1 - x[0] > 0:
                 good = False
             if boat == 0 and good:
                 key = self.y_values.index([x[0], x[1], 1, self.x1 - x[0], self.y1 - x[1]])
@@ -82,5 +82,5 @@ class Missionary:
         self.createDot1()
 
 
-problem = Missionary(4, 3)
+problem = Missionary(5, 4)
 problem.creating_solution()
