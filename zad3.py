@@ -105,7 +105,7 @@ class Graph:
             nv = self.addVertex(f)
         if t not in self.vertList:
             nv = self.addVertex(t)
-        self.vertList[f].addNeighbor(self.vertList[t], cost)
+        self.vertList[f].addNeighbour(self.vertList[t], cost)
 
     def getVertices(self):
         return self.vertList.keys()
