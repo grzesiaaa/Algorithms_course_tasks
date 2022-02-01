@@ -84,7 +84,3 @@ class Missionary:
                     vertQueue.enqueue(nbr)
             currentVert.setColor('black')
         self.createDot1()
-
-
-problem = Missionary(5, 4)
-problem.creating_solution()
