@@ -1,5 +1,5 @@
 from pythonds.graphs import PriorityQueue
-from zad3 import Graph
+
 
 def dijkstra(aGraph, start):
     pq = PriorityQueue()
@@ -15,10 +15,11 @@ def dijkstra(aGraph, start):
                 pq.decreaseKey(nextVert, newDist)
 
     for i in aGraph:
-        print("Shortest path from " + str(start.id) + " to " + str(i.id) + ", distance: " + str(i.dist))
-        paths = []
+        print("Shortest path from " + str(start.id) + " to " + str(i.id))
+        print("Distance:" + str(i.dist))
 
-        while i != start:
+        paths = []
+        while i is not start:
             paths.append(i.id)
             i = i.getPred()
 
