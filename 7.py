@@ -23,7 +23,7 @@ def dijkstra(aGraph, start, goal):
 
         paths.append(start.id)
         paths.reverse()
-        print(paths)
+        return paths
 
 def canisters(can1 = 4, can2 = 3, goal = 2):
     if can1 < goal and can2 < goal:
@@ -56,7 +56,8 @@ def canisters(can1 = 4, can2 = 3, goal = 2):
         graph.addEdge(v, (0, v[1]))
         graph.addEdge(v, (v[0], 0))
 
-    dijkstra(graph, graph.getVertex((0,0)), goal)
+    return dijkstra(graph, graph.getVertex((0,0)), goal)
+
 
 
 
