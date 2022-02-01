@@ -12,7 +12,7 @@ class Vertex:
         self.disc = 0
         self.fin = 0
 
-    def addNeighbor(self, nbr, weight=0):
+    def addNeighbour(self, nbr, weight=0):
         self.connectedTo[nbr] = weight
 
     def setColor(self, color):
@@ -77,29 +77,6 @@ class QueueBaE(object):
 
     def __str__(self):
         return str(self.list_of_items)
-
-
-class Stack:
-    def __init__(self):
-        self.items = []
-
-    def isEmpty(self):
-        return self.items == []
-
-    def push(self, item):
-        self.items.append(item)
-
-    def pop(self):
-        return self.items.pop()
-
-    def peek(self):
-        return self.items[len(self.items)-1]
-
-    def size(self):
-        return len(self.items)
-
-    def __str__(self):
-        return str(self.items)
 
 
 class Graph:
