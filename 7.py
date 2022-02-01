@@ -60,7 +60,3 @@ def canisters(can1 = 4, can2 = 3, goal = 2):
 
 
 
-
-print(canisters(6,4,5))
-
-
