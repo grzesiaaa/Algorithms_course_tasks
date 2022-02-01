@@ -1,7 +1,7 @@
 from pythonds.graphs import PriorityQueue
+from zad3 import Graph
 
-
-def shortest_way(aGraph, start):
+def dijkstra(aGraph, start):
     pq = PriorityQueue()
     start.setDistance(0)
     pq.buildHeap([(v.getDistance(), v) for v in aGraph])
@@ -13,3 +13,15 @@ def shortest_way(aGraph, start):
                 nextVert.setDistance(newDist)
                 nextVert.setPred(currentVert)
                 pq.decreaseKey(nextVert, newDist)
+
+    for i in aGraph:
+        print("Shortest path from " + str(start.id) + " to " + str(i.id) + ", distance: " + str(i.dist))
+        paths = []
+
+        while i != start:
+            paths.append(i.id)
+            i = i.getPred()
+
+        paths.append(start.id)
+        paths.reverse()
+        print(paths)
