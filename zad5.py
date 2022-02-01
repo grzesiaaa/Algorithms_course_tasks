@@ -14,15 +14,17 @@ def dijkstra(aGraph, start):
                 nextVert.setPred(currentVert)
                 pq.decreaseKey(nextVert, newDist)
 
+    p = []
+    print("Shortest paths from " + str(start.id))
     for i in aGraph:
-        print("Shortest path from " + str(start.id) + " to " + str(i.id))
-        print("Distance:" + str(i.dist))
-
         paths = []
         while i is not start:
             paths.append(i.id)
             i = i.getPred()
-
         paths.append(start.id)
         paths.reverse()
-        print(paths)
+        p.append(paths)
+    dict = {}
+    for key in list(g.getVertices()):
+        dict[key] = len(p[key])-1
+    return dict
