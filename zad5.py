@@ -28,3 +28,4 @@ def dijkstra(aGraph, start):
     for key in list(g.getVertices()):
         dict[key] = len(p[key])-1
     return dict
+
