@@ -8,10 +8,14 @@ class Missionary:
         n = 0
         self.x1 = x1
         self.y1 = y1
+        if x1 < y1:
+            raise ValueError('There cannot be more cannibals than missionaries!')
+        if not isinstance(x1, int) or not (isinstance(y1, int)):
+            raise ValueError('Number of people must be integer!')
         for i in range(x1+1):
             for j in range(y1+1):
                 for k in range(2):
-                    self.y[n] = [i, j, k, x1 - i, y1 - j]
+                    self.y[n] = [i, j, k, x1 - i, y1 - j]  # 1 is right bank 0 is left bank
                     n += 1
         self.y_values = list(self.y.values())
         self.graph = Graph()
