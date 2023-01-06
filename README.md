@@ -1,1 +1,0 @@
-# Algorytmy_lista3
